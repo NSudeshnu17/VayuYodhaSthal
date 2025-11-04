@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "/vayu-yodha-sthal/static/js/main.27e37485.js",
-    "index.html": "/vayu-yodha-sthal/index.html",
-    "main.27e37485.js.map": "/vayu-yodha-sthal/static/js/main.27e37485.js.map"
+    "main.js": "/VayuYodhaSthal/static/js/main.27e37485.js",
+    "index.html": "/VayuYodhaSthal/index.html",
+    "main.27e37485.js.map": "/VayuYodhaSthal/static/js/main.27e37485.js.map"
   },
   "entrypoints": [
     "static/js/main.27e37485.js"
