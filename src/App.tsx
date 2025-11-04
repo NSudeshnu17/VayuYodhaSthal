@@ -2846,7 +2846,7 @@ export default function App() {
           <div className="hero">
             <div className="hero-content">
               <img
-                src="/images/iaf-logo.svg"
+                src="images/iaf-logo.svg"
                 alt="Indian Air Force Emblem"
                 className="hero-iaf-logo"
               />
