@@ -7,7 +7,7 @@ st.title("Vayu Yodha Sthal – Audio Guided Tour")
 st.write("Below is the full interactive React tour:")
 
 components.iframe(
-    "https://NSudeshnu17.github.io/vayu-yodha-sthal/",
+    "https://nsudeshnu17.github.io/VayuYodhaSthal/",
     height=800,
     scrolling=True,
 )
