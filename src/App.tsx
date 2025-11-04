@@ -12,7 +12,7 @@ const css = String.raw`
   --accent: #f59e0b;
   --success: #10b981;
   --danger: #ef4444;
-  --saffron: #FF9933;
+  --saffron: #FF9933;npm
   --green: #138808;
   --white: #FFFFFF;
   --slate-50: #f8fafc;
@@ -1598,7 +1598,7 @@ const HEROES: Hero[] = [
     operation: "Indo–Pak War 1971, defence of Srinagar",
     intro:
       "Flying Officer Nirmal Jit Singh Sekhon, a young Gnat pilot of No. 18 Squadron, is the only officer of the Indian Air Force to be awarded the Param Vir Chakra. On the morning of 14 December 1971 he scrambled alone against a formation of Pakistani Sabre jets attacking Srinagar airfield and, though heavily outnumbered, pressed home his attack with fearless determination, sacrificing his life to shield the valley and his comrades.",
-    image: "/images/heroes/sekhon.jpg",
+    image: "/images/NJS-Sekhon.png",
   },
   {
     id: "mehar-singh",
@@ -1611,7 +1611,7 @@ const HEROES: Hero[] = [
     operation: "Jammu & Kashmir Operations 1947–48",
     intro:
       "Air Commodore Mehar Singh was a legendary pioneer of the IAF, leading some of the earliest and most dangerous air operations into the mountains of Jammu & Kashmir in 1947–48. He personally flew into unprepared high-altitude airstrips like Leh and Poonch, often in bad weather and under the threat of enemy fire, opening vital lifelines that saved garrisons and civilians alike.",
-    image: "/images/heroes/mehar-singh.jpg",
+    image: "/images/Mehar-singh.jpg",
   },
   {
     id: "minoo-engineer",
