@@ -259,6 +259,11 @@ p {
 .btn-icon-primary {
   width: 64px;
   height: 64px;
+  border-radius: var(--radius-full);
+  border: 3px solid rgba(255,255,255,0.7);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: linear-gradient(135deg, var(--primary), #3b82f6);
   color: white;
   box-shadow: 0 8px 30px rgba(37, 99, 235, 0.3);
@@ -1126,7 +1131,6 @@ p {
   margin-bottom: 8px;
 }
 
-.hero-citation,
 .hero-story {
   background: var(--slate-50);
   border-radius: 16px;
@@ -1403,150 +1407,152 @@ p {
 `;
 
 /* ======================= ICONS ======================= */
-const Icon = React.memo(({
-  name,
-  size = 20,
-  color = "currentColor",
-}: {
-  name: string;
-  size?: number;
-  color?: string;
-}) => {
-  const props = {
-    width: size,
-    height: size,
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: color,
-    strokeWidth: 2,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-  };
+const Icon = React.memo(
+  ({
+    name,
+    size = 20,
+    color = "currentColor",
+  }: {
+    name: string;
+    size?: number;
+    color?: string;
+  }) => {
+    const props = {
+      width: size,
+      height: size,
+      viewBox: "0 0 24 24",
+      fill: "none",
+      stroke: color,
+      strokeWidth: 2,
+      strokeLinecap: "round" as const,
+      strokeLinejoin: "round" as const,
+    };
 
-  const icons: Record<string, React.ReactElement> = {
-    play: (
-      <svg {...props}>
-        <polygon points="5 3 19 12 5 21 5 3" fill={color} stroke="none" />
-      </svg>
-    ),
-    pause: (
-      <svg {...props}>
-        <rect x="6" y="4" width="4" height="16" />
-        <rect x="14" y="4" width="4" height="16" />
-      </svg>
-    ),
-    next: (
-      <svg {...props}>
-        <polygon points="5 4 15 12 5 20 5 4" />
-        <line x1="19" y1="5" x2="19" y2="19" />
-      </svg>
-    ),
-    prev: (
-      <svg {...props}>
-        <polygon points="19 20 9 12 19 4 19 20" />
-        <line x1="5" y1="19" x2="5" y2="5" />
-      </svg>
-    ),
-    home: (
-      <svg {...props}>
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-        <polyline points="9 22 9 12 15 12 15 22" />
-      </svg>
-    ),
-    star: (
-      <svg {...props}>
-        <polygon
-          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
-          fill={color}
-          stroke={color}
-        />
-      </svg>
-    ),
-    close: (
-      <svg {...props}>
-        <line x1="18" y1="6" x2="6" y2="18" />
-        <line x1="6" y1="6" x2="18" y2="18" />
-      </svg>
-    ),
-    camera: (
-      <svg {...props}>
-        <rect x="3" y="5" width="18" height="14" rx="2" />
-        <circle cx="12" cy="12" r="3" />
-      </svg>
-    ),
-    medal: (
-      <svg {...props}>
-        <circle cx="12" cy="10" r="6" />
-        <path d="M8 14l-2 8 6-2 6 2-2-8" />
-      </svg>
-    ),
-    music: (
-      <svg {...props}>
-        <path d="M9 18V5l12-2v13" />
-        <circle cx="6" cy="18" r="3" />
-        <circle cx="18" cy="16" r="3" />
-      </svg>
-    ),
-    users: (
-      <svg {...props}>
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-      </svg>
-    ),
-    award: (
-      <svg {...props}>
-        <circle cx="12" cy="8" r="7" />
-        <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
-      </svg>
-    ),
-    headphones: (
-      <svg {...props}>
-        <path d="M4 14v-2a8 8 0 0 1 16 0v2" />
-        <rect x="2" y="14" width="4" height="6" rx="1" />
-        <rect x="18" y="14" width="4" height="6" rx="1" />
-      </svg>
-    ),
-    clock: (
-      <svg {...props}>
-        <circle cx="12" cy="12" r="9" />
-        <polyline points="12 7 12 12 16 14" />
-      </svg>
-    ),
-    mapPin: (
-      <svg {...props}>
-        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-        <circle cx="12" cy="10" r="3" />
-      </svg>
-    ),
-    phone: (
-      <svg {...props}>
-        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-      </svg>
-    ),
-    mail: (
-      <svg {...props}>
-        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-        <polyline points="22,6 12,13 2,6" />
-      </svg>
-    ),
-    info: (
-      <svg {...props}>
-        <circle cx="12" cy="12" r="10" />
-        <line x1="12" y1="16" x2="12" y2="12" />
-        <line x1="12" y1="8" x2="12.01" y2="8" />
-      </svg>
-    ),
-    shield: (
-      <svg {...props}>
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-      </svg>
-    ),
-  };
+    const icons: Record<string, React.ReactElement> = {
+      play: (
+        <svg {...props}>
+          <polygon points="5 3 19 12 5 21 5 3" fill={color} stroke="none" />
+        </svg>
+      ),
+      pause: (
+        <svg {...props}>
+          <rect x="6" y="4" width="4" height="16" />
+          <rect x="14" y="4" width="4" height="16" />
+        </svg>
+      ),
+      next: (
+        <svg {...props}>
+          <polygon points="5 4 15 12 5 20 5 4" />
+          <line x1="19" y1="5" x2="19" y2="19" />
+        </svg>
+      ),
+      prev: (
+        <svg {...props}>
+          <polygon points="19 20 9 12 19 4 19 20" />
+          <line x1="5" y1="19" x2="5" y2="5" />
+        </svg>
+      ),
+      home: (
+        <svg {...props}>
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          <polyline points="9 22 9 12 15 12 15 22" />
+        </svg>
+      ),
+      star: (
+        <svg {...props}>
+          <polygon
+            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+            fill={color}
+            stroke={color}
+          />
+        </svg>
+      ),
+      close: (
+        <svg {...props}>
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      ),
+      camera: (
+        <svg {...props}>
+          <rect x="3" y="5" width="18" height="14" rx="2" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+      ),
+      medal: (
+        <svg {...props}>
+          <circle cx="12" cy="10" r="6" />
+          <path d="M8 14l-2 8 6-2 6 2-2-8" />
+        </svg>
+      ),
+      music: (
+        <svg {...props}>
+          <path d="M9 18V5l12-2v13" />
+          <circle cx="6" cy="18" r="3" />
+          <circle cx="18" cy="16" r="3" />
+        </svg>
+      ),
+      users: (
+        <svg {...props}>
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+      ),
+      award: (
+        <svg {...props}>
+          <circle cx="12" cy="8" r="7" />
+          <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+        </svg>
+      ),
+      headphones: (
+        <svg {...props}>
+          <path d="M4 14v-2a8 8 0 0 1 16 0v2" />
+          <rect x="2" y="14" width="4" height="6" rx="1" />
+          <rect x="18" y="14" width="4" height="6" rx="1" />
+        </svg>
+      ),
+      clock: (
+        <svg {...props}>
+          <circle cx="12" cy="12" r="9" />
+          <polyline points="12 7 12 12 16 14" />
+        </svg>
+      ),
+      mapPin: (
+        <svg {...props}>
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+          <circle cx="12" cy="10" r="3" />
+        </svg>
+      ),
+      phone: (
+        <svg {...props}>
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+        </svg>
+      ),
+      mail: (
+        <svg {...props}>
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+          <polyline points="22,6 12,13 2,6" />
+        </svg>
+      ),
+      info: (
+        <svg {...props}>
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="16" x2="12" y2="12" />
+          <line x1="12" y1="8" x2="12.01" y2="8" />
+        </svg>
+      ),
+      shield: (
+        <svg {...props}>
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>
+      ),
+    };
 
-  return icons[name] || null;
-});
+    return icons[name] || null;
+  }
+);
 
 /* ======================= DATA ======================= */
 interface Hero {
@@ -1558,8 +1564,7 @@ interface Hero {
   award: "PVC" | "MVC" | "AC";
   date: string;
   operation?: string;
-  citation: string;
-  story: string;
+  intro: string;
   image?: string;
 }
 
@@ -1584,63 +1589,276 @@ interface Quiz {
 const HEROES: Hero[] = [
   {
     id: "sekhon",
-    name: "Nirmaljit Singh Sekhon",
+    name: "Nirmal Jit Singh Sekhon",
     rank: "Flying Officer",
     service: "Indian Air Force",
-    lifespan: "1943 - 1971",
+    lifespan: "1943 – 1971",
     award: "PVC",
     date: "14 December 1971",
-    operation: "Indo-Pakistani War 1971",
-    citation:
-      "Flying Officer Nirmaljit Singh Sekhon was on readiness duty at Srinagar Air Field on 14 December 1971 when a wave of enemy Sabre aircraft attacked the airfield. Despite being outnumbered, he immediately took off to engage the enemy and secured hits on two enemy aircraft. The gallant officer was killed in action. For his exceptional gallantry and supreme sacrifice, Flying Officer Sekhon was awarded the Param Vir Chakra posthumously.",
-    story:
-      "On 14 December 1971, Srinagar airfield came under attack by six Pakistani Sabre jets. Flying Officer Sekhon immediately scrambled in his Folland Gnat fighter. Despite being outnumbered, he engaged the enemy formation fearlessly. In the fierce aerial combat that followed, he managed to damage two enemy aircraft before his own aircraft was hit. He continued fighting till the very end, protecting the airfield and the Kashmir valley from enemy attack.",
-    image:
-      "https://upload.wikimedia.org/wikipedia/en/4/46/Nirmaljit_Singh_Sekhon_PVC.jpg",
+    operation: "Indo–Pak War 1971, defence of Srinagar",
+    intro:
+      "Flying Officer Nirmal Jit Singh Sekhon, a young Gnat pilot of No. 18 Squadron, is the only officer of the Indian Air Force to be awarded the Param Vir Chakra. On the morning of 14 December 1971 he scrambled alone against a formation of Pakistani Sabre jets attacking Srinagar airfield and, though heavily outnumbered, pressed home his attack with fearless determination, sacrificing his life to shield the valley and his comrades.",
+    image: "/images/heroes/sekhon.jpg",
   },
   {
-    id: "dsilva",
-    name: "Denis Anthony La Fontaine",
+    id: "mehar-singh",
+    name: "Mehar Singh",
+    rank: "Air Commodore",
+    service: "Indian Air Force",
+    lifespan: "1915 – 1952",
+    award: "MVC",
+    date: "1950",
+    operation: "Jammu & Kashmir Operations 1947–48",
+    intro:
+      "Air Commodore Mehar Singh was a legendary pioneer of the IAF, leading some of the earliest and most dangerous air operations into the mountains of Jammu & Kashmir in 1947–48. He personally flew into unprepared high-altitude airstrips like Leh and Poonch, often in bad weather and under the threat of enemy fire, opening vital lifelines that saved garrisons and civilians alike.",
+    image: "/images/heroes/mehar-singh.jpg",
+  },
+  {
+    id: "minoo-engineer",
+    name: "Minoo Merwan Engineer",
+    rank: "Wing Commander",
+    service: "Indian Air Force",
+    lifespan: "1921 – 1997",
+    award: "MVC",
+    date: "1950",
+    operation: "Jammu & Kashmir Operations 1947–48",
+    intro:
+      "Wing Commander Minoo Merwan Engineer was a highly decorated fighter pilot who had already distinguished himself in the Second World War. During the 1947–48 Kashmir operations he led daring missions in treacherous terrain, using his skill and leadership to provide close air support and ensure that Indian troops on the ground could hold vital positions in the face of determined enemy attacks.",
+    image: "/images/heroes/minoo-engineer.jpg",
+  },
+  {
+    id: "noronha",
+    name: "Sidney Basil Noronha",
     rank: "Squadron Leader",
     service: "Indian Air Force",
-    lifespan: "1928 - 1971",
+    lifespan: "1922 – 1952",
     award: "MVC",
-    date: "14 December 1971",
-    operation: "Indo-Pakistani War 1971",
-    citation:
-      "Squadron Leader Denis Anthony La Fontaine displayed exceptional gallantry in air operations during the 1971 war. Leading numerous strike missions deep into enemy territory, he showed complete disregard for personal safety while inflicting maximum damage on enemy positions.",
-    story:
-      "Squadron Leader La Fontaine led multiple dangerous missions over heavily defended enemy territory. His exceptional flying skills and tactical brilliance ensured mission success while minimizing casualties.",
+    date: "1950",
+    operation: "Jammu & Kashmir Operations 1947–48",
+    intro:
+      "Squadron Leader Sidney Basil Noronha was a bomber pilot who repeatedly flew hazardous sorties over enemy-held areas in Jammu & Kashmir. Operating from difficult forward bases and facing rugged mountains, primitive navigation aids and heavy ground fire, he struck at key enemy positions with precision and calm courage that inspired his squadron.",
+    image: "/images/heroes/sidney-noronha.jpg",
   },
   {
-    id: "balaswamy",
-    name: "H S Balaswamy",
+    id: "moolgavkar",
+    name: "Hrushikesh Moolgavkar",
     rank: "Wing Commander",
     service: "Indian Air Force",
-    lifespan: "1935 - 1971",
+    lifespan: "1926 – 2015",
     award: "MVC",
-    date: "4 December 1971",
-    operation: "Indo-Pakistani War 1971",
-    citation:
-      "Wing Commander H S Balaswamy showed exceptional courage and leadership while leading strike missions against heavily defended enemy targets. Despite intense anti-aircraft fire, he pressed home his attacks with determination.",
-    story:
-      "Wing Commander Balaswamy was known for his precise bombing runs and fearless approach to combat. During the 1971 war, he led his squadron in critical missions that destroyed key enemy installations.",
+    date: "1950",
+    operation: "Jammu & Kashmir Operations 1947–48",
+    intro:
+      "Wing Commander Hrushikesh Moolgavkar, who would later become Chief of the Air Staff, earned the Maha Vir Chakra for his fearless leadership in the early Kashmir air operations. Flying repeated missions over mountainous terrain, he led his pilots in close support of hard-pressed troops and helped turn the tide in favour of India at a critical stage of the conflict.",
+    image: "/images/heroes/moolgavkar.jpg",
   },
   {
-    id: "sharma",
-    name: "Rakesh Sharma",
+    id: "jagmohan-nath",
+    name: "Jag Mohan Nath",
+    rank: "Squadron Leader",
+    service: "Indian Air Force",
+    lifespan: "1930 – 2023",
+    award: "MVC",
+    date: "1963",
+    operation: "High-risk strategic reconnaissance",
+    intro:
+      "Squadron Leader Jag Mohan Nath was a legendary photo-reconnaissance pilot who flew deep, unarmed missions over hostile territory. Again and again he took his aircraft alone over enemy defenses at great personal risk, bringing back priceless intelligence that shaped India’s battle plans and saved countless lives on the ground.",
+    image: "/images/heroes/jagmohan-nath.jpg",
+  },
+  {
+    id: "goodman",
+    name: "William MacDonald Goodman",
     rank: "Wing Commander",
     service: "Indian Air Force",
-    lifespan: "1949 - Present",
+    lifespan: "1920 – 2015",
+    award: "MVC",
+    date: "1965",
+    operation: "Indo–Pak War 1965",
+    intro:
+      "Wing Commander William MacDonald Goodman commanded a bomber squadron during the 1965 war. He led his crews on repeated night and day attacks against heavily defended targets, often flying through intense anti-aircraft fire, and his cool leadership and accuracy inflicted serious damage on the enemy’s war-making capability.",
+    image: "/images/heroes/william-goodman.jpg",
+  },
+  {
+    id: "prem-pal-singh",
+    name: "Prem Pal Singh",
+    rank: "Wing Commander",
+    service: "Indian Air Force",
+    lifespan: "1929 – 2020",
+    award: "MVC",
+    date: "1965",
+    operation: "Indo–Pak War 1965",
+    intro:
+      "Wing Commander Prem Pal Singh commanded an operational bomber squadron during the 1965 conflict. Between 6 and 9 September his formation struck vital enemy airfields and infrastructure again and again, undeterred by heavy ground fire, and his determination and flying skill significantly weakened the enemy’s ability to sustain air operations.",
+    image: "/images/heroes/prem-pal-singh.jpg",
+  },
+  {
+    id: "padmanabha-gautam",
+    name: "Padmanabha Gautam",
+    rank: "Squadron Leader",
+    service: "Indian Air Force",
+    lifespan: "1933 – 1966",
+    award: "MVC",
+    date: "1965",
+    operation: "Indo–Pak War 1965",
+    intro:
+      "Squadron Leader Padmanabha Gautam was a Canberra pilot who flew deep-penetration bombing missions into hostile territory during the 1965 war. He repeatedly led his aircraft against well-defended targets at low level, pressing home his attacks with complete disregard for personal safety until he was ultimately killed in action.",
+    image: "/images/heroes/padmanabha-gautam.jpg",
+  },
+  {
+    id: "benegal",
+    name: "Ramesh Sakharam Benegal",
+    rank: "Wing Commander",
+    service: "Indian Air Force",
+    lifespan: "1926 – 2003",
+    award: "MVC",
+    date: "1971",
+    operation: "Indo–Pak War 1971 (Eastern Sector)",
+    intro:
+      "Wing Commander Ramesh Sakharam Benegal led a bomber squadron tasked with crippling enemy forces in East Pakistan in 1971. Night after night he flew long missions through bad weather and heavy ground fire, guiding his crews to vital bridges, airfields and troop concentrations whose destruction hastened the liberation of Bangladesh.",
+    image: "/images/heroes/ramesh-benegal.jpg",
+  },
+  {
+    id: "vb-vasisht",
+    name: "Vidya Bhushan Vasisht",
+    rank: "Wing Commander",
+    service: "Indian Air Force",
+    lifespan: "1934 – 2012",
+    award: "MVC",
+    date: "1971",
+    operation: "Indo–Pak War 1971",
+    intro:
+      "Wing Commander Vidya Bhushan Vasisht distinguished himself as a leader of strike operations in the 1971 war. He personally flew numerous sorties over heavily defended targets, calmly directing his formation under fire and ensuring that each mission achieved its aim with precision.",
+    image: "/images/heroes/vb-vasisht.jpg",
+  },
+  {
+    id: "mangat",
+    name: "Harcharan Singh Mangat",
+    rank: "Wing Commander",
+    service: "Indian Air Force",
+    lifespan: "1933 – 2010",
+    award: "MVC",
+    date: "1971",
+    operation: "Indo–Pak War 1971",
+    intro:
+      "Wing Commander Harcharan Singh Mangat was a combat leader whose unit saw intense action in 1971. He consistently chose the most dangerous tasks for himself, attacking defended airfields and troop concentrations and inspiring his pilots by leading from the front.",
+    image: "/images/heroes/hs-mangat.jpg",
+  },
+  {
+    id: "banerji",
+    name: "Madhabendra Banerji",
+    rank: "Wing Commander",
+    service: "Indian Air Force",
+    lifespan: "1934 – 2005",
+    award: "MVC",
+    date: "1971",
+    operation: "Indo–Pak War 1971",
+    intro:
+      "Wing Commander Madhabendra Banerji commanded a fighter-bomber squadron during the 1971 operations. Under his leadership the unit carried out repeated attacks against enemy armour, gun positions and supply lines, often at low level and under intense fire, playing a decisive role in blunting enemy advances.",
+    image: "/images/heroes/madhabendra-banerji.jpg",
+  },
+  {
+    id: "parker",
+    name: "Cecil Vivian Parker",
+    rank: "Wing Commander",
+    service: "Indian Air Force",
+    lifespan: "1923 – 2004",
+    award: "MVC",
+    date: "1971",
+    operation: "Indo–Pak War 1971",
+    intro:
+      "Wing Commander Cecil Vivian Parker led a Hunter squadron that spearheaded many of the IAF’s ground-attack missions in the western sector in 1971. With cool professionalism he flew low-level strikes against enemy armour and artillery, disregarding heavy fire to destroy positions that threatened Indian troops.",
+    image: "/images/heroes/cv-parker.jpg",
+  },
+  {
+    id: "bhardwaj",
+    name: "Ravinder Nath Bhardwaj",
+    rank: "Squadron Leader",
+    service: "Indian Air Force",
+    lifespan: "1937 – 1971",
+    award: "MVC",
+    date: "1971",
+    operation: "Indo–Pak War 1971",
+    intro:
+      "Squadron Leader Ravinder Nath Bhardwaj was a courageous strike pilot in 1971. He flew multiple hazardous missions at low altitude against strongly defended enemy targets and continued his attacks even after his aircraft was hit, displaying gallantry of the highest order.",
+    image: "/images/heroes/rn-bhardwaj.jpg",
+  },
+  {
+    id: "sk-kaul",
+    name: "Swaroop Krishna Kaul",
+    rank: "Wing Commander",
+    service: "Indian Air Force",
+    lifespan: "1935 – 2019",
+    award: "MVC",
+    date: "1971",
+    operation: "Indo–Pak War 1971",
+    intro:
+      "Wing Commander Swaroop Krishna Kaul, later an Air Marshal, commanded a MiG squadron in the western sector during the 1971 war. He personally led deep strike and escort missions into enemy territory, often in the face of strong opposition, and his tactical acumen and personal bravery contributed greatly to achieving air superiority.",
+    image: "/images/heroes/sk-kaul.jpg",
+  },
+  {
+    id: "talwar",
+    name: "Man Mohan Bir Singh Talwar",
+    rank: "Wing Commander",
+    service: "Indian Air Force",
+    lifespan: "1932 – 2012",
+    award: "MVC",
+    date: "1971",
+    operation: "Indo–Pak War 1971",
+    intro:
+      "Wing Commander Man Mohan Bir Singh Talwar led his squadron with exceptional courage during the 1971 conflict. Undertaking mission after mission over defended targets, he demonstrated cool judgement under fire and an unwavering commitment to support the soldiers fighting on the ground.",
+    image: "/images/heroes/mmbs-talwar.jpg",
+  },
+  {
+    id: "d-costa",
+    name: "Albert D’Costa",
+    rank: "Wing Commander",
+    service: "Indian Air Force",
+    lifespan: "1934 – 2012",
+    award: "MVC",
+    date: "1971",
+    operation: "Indo–Pak War 1971",
+    intro:
+      "Wing Commander Albert D’Costa was a fighter-bomber leader who carried out several key strikes during the 1971 war. He repeatedly led his formation into heavily defended areas, attacking gun positions, fuel dumps and armour and ensuring that his squadron always completed its tasks despite strong opposition.",
+    image: "/images/heroes/albert-dcosta.jpg",
+  },
+  {
+    id: "chandan-singh",
+    name: "Chandan Singh",
+    rank: "Group Captain",
+    service: "Indian Air Force",
+    lifespan: "1925 – 2020",
+    award: "MVC",
+    date: "1971",
+    operation: "Indo–Pak War 1971, Eastern Sector",
+    intro:
+      "Group Captain Chandan Singh masterminded and personally supervised daring transport and helicopter operations in the eastern theatre in 1971. He played a central role in the famous heliborne assault at Sylhet and in sustaining forward troops across rivers and marshes, often flying in marginal weather and under enemy fire.",
+    image: "/images/heroes/chandan-singh.jpg",
+  },
+  {
+    id: "devayya",
+    name: "Ajjamada Boppayya Devayya",
+    rank: "Squadron Leader",
+    service: "Indian Air Force",
+    lifespan: "1932 – 1965",
+    award: "MVC",
+    date: "1965 (posthumous recognition)",
+    operation: "Indo–Pak War 1965",
+    intro:
+      "Squadron Leader A. B. Devayya flew a Mystère fighter-bomber during the 1965 war. On a deep strike mission over Pakistan he engaged an enemy Sabre in a fierce dogfight, shooting it down at the cost of his own life. His gallantry came to light years later through Pakistani records, and he was awarded the Maha Vir Chakra posthumously.",
+    image: "/images/heroes/ab-devayya.jpg",
+  },
+  {
+    id: "nirala",
+    name: "Jyoti Prakash Nirala",
+    rank: "Corporal (Garud Commando)",
+    service: "Indian Air Force",
+    lifespan: "1986 – 2017",
     award: "AC",
-    date: "3 April 1984",
-    operation: "Space Mission",
-    citation:
-      "Wing Commander Rakesh Sharma became the first Indian citizen to travel in space, bringing great honor to the Indian Air Force and the nation.",
-    story:
-      'As part of the Soviet Interkosmos program, Wing Commander Sharma spent 7 days, 21 hours, and 40 minutes in space aboard Salyut 7. When asked how India looked from space, he famously replied "Saare Jahan Se Achha".',
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Rakesh_sharma.jpg/220px-Rakesh_sharma.jpg",
+    date: "18 November 2017",
+    operation: "Counter-terrorist operation, Jammu & Kashmir",
+    intro:
+      "Corporal Jyoti Prakash Nirala was a Garud commando who laid down his life while fighting terrorists in Bandipora district of Jammu & Kashmir in November 2017. Despite heavy hostile fire he held his ground in an exposed position, killing and injuring multiple terrorists and shielding his team until he was fatally wounded, earning the Ashoka Chakra for supreme peacetime valour.",
+    image: "/images/heroes/jp-nirala.jpg",
   },
 ];
 
@@ -1812,366 +2030,447 @@ const formatTime = (time: number): string => {
 
 /* ======================= COMPONENTS ======================= */
 
-const AudioPlayer = React.memo(({
-  stop,
-  onNext,
-  onPrevious,
-}: {
-  stop: Stop;
-  onNext: () => void;
-  onPrevious: () => void;
-}) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(stop.duration);
-  const [audioError] = useState(false);
-  const intervalRef = useRef<number | null>(null);
+const AudioPlayer = React.memo(
+  ({
+    stop,
+    onNext,
+    onPrevious,
+    autoStart = true,
+  }: {
+    stop: Stop;
+    onNext: () => void;
+    onPrevious: () => void;
+    autoStart?: boolean;
+  }) => {
+    const audioRef = useRef<HTMLAudioElement | null>(null);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [currentTime, setCurrentTime] = useState(0);
+    const [duration, setDuration] = useState(stop.duration);
+    const [audioError, setAudioError] = useState<string | null>(null);
 
-  useEffect(() => {
-    setCurrentTime(0);
-    setIsPlaying(false);
-    setDuration(stop.duration);
-  }, [stop.id, stop.duration]);
+    // Set up listeners for the current audio element
+    useEffect(() => {
+      const audio = audioRef.current;
+      if (!audio) return;
 
-  useEffect(() => {
-    if (isPlaying) {
-      intervalRef.current = window.setInterval(() => {
-        setCurrentTime((prev) => {
-          const next = prev + 0.1;
-          if (next >= duration) {
-            setIsPlaying(false);
-            onNext();
-            return 0;
+      const handleLoaded = () => {
+        setDuration(audio.duration || stop.duration);
+        if (autoStart && !isPlaying) {
+          const p = audio.play();
+          if (p && typeof p.then === "function") {
+            p.then(() => setIsPlaying(true)).catch(() => {
+              setIsPlaying(false);
+              setAudioError("Tap the play button to start the narration.");
+            });
+          } else {
+            setIsPlaying(true);
           }
-          return next;
-        });
-      }, 100);
-    } else {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
+        }
+      };
+
+      const handleTimeUpdate = () => {
+        setCurrentTime(audio.currentTime || 0);
+      };
+
+      const handleEnded = () => {
+        setIsPlaying(false);
+        setCurrentTime(0);
+      };
+
+      const handleError = () => {
+        setAudioError("Audio file could not be loaded. Please check connectivity.");
+      };
+
+      audio.addEventListener("loadedmetadata", handleLoaded);
+      audio.addEventListener("timeupdate", handleTimeUpdate);
+      audio.addEventListener("ended", handleEnded);
+      audio.addEventListener("error", handleError);
+
+      return () => {
+        audio.removeEventListener("loadedmetadata", handleLoaded);
+        audio.removeEventListener("timeupdate", handleTimeUpdate);
+        audio.removeEventListener("ended", handleEnded);
+        audio.removeEventListener("error", handleError);
+      };
+    }, [stop.id, stop.duration, autoStart, isPlaying]);
+
+    // Reset when stop changes
+    useEffect(() => {
+      setCurrentTime(0);
+      setAudioError(null);
+    }, [stop.id]);
+
+    const togglePlay = useCallback(() => {
+      const audio = audioRef.current;
+      if (!audio) return;
+
+      if (isPlaying) {
+        audio.pause();
+        setIsPlaying(false);
+      } else {
+        const p = audio.play();
+        if (p && typeof p.then === "function") {
+          p.then(() => {
+            setIsPlaying(true);
+            setAudioError(null);
+          }).catch(() => {
+            setIsPlaying(false);
+            setAudioError("Browser blocked autoplay. Tap again to allow playback.");
+          });
+        } else {
+          setIsPlaying(true);
+        }
       }
-    }
+    }, [isPlaying]);
 
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, [isPlaying, duration, onNext]);
+    const handleProgressClick = useCallback(
+      (e: React.MouseEvent<HTMLDivElement>) => {
+        const audio = audioRef.current;
+        if (!audio || !duration) return;
+        const rect = e.currentTarget.getBoundingClientRect();
+        const percent = (e.clientX - rect.left) / rect.width;
+        const newTime = percent * duration;
+        audio.currentTime = newTime;
+        setCurrentTime(newTime);
+      },
+      [duration]
+    );
 
-  const togglePlay = useCallback(() => {
-    setIsPlaying((prev) => !prev);
-  }, []);
+    const progressPercent = duration ? (currentTime / duration) * 100 : 0;
 
-  const handleProgressClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const percent = (e.clientX - rect.left) / rect.width;
-    setCurrentTime(percent * duration);
-  }, [duration]);
-
-  return (
-    <div className="audio-player">
-      {audioError && (
-        <div className="audio-status">
-          ⚠️ Demo Mode: Audio simulation active (actual files unavailable)
-        </div>
-      )}
-
-      <div className="audio-info">
-        <div className="audio-label">
-          <Icon name="music" size={18} />
-          Audio narration {audioError && "(Demo)"}
-        </div>
-        <div className="audio-duration">
-          <Icon name="clock" size={16} />
-          {formatMinutesFromSeconds(stop.duration)}
-        </div>
-      </div>
-
-      <div className="progress-bar" onClick={handleProgressClick}>
-        <div
-          className="progress-fill"
-          style={{ width: `${(currentTime / duration) * 100 || 0}%` }}
+    return (
+      <div className="audio-player">
+        <audio
+          ref={audioRef}
+          src={stop.audioFile}
+          preload="auto"
+          style={{ display: "none" }}
         />
+
+        {audioError && (
+          <div className="audio-status">
+            ⚠️ {audioError}
+          </div>
+        )}
+
+        <div className="audio-info">
+          <div className="audio-label">
+            <Icon name="music" size={18} />
+            Audio narration
+          </div>
+          <div className="audio-duration">
+            <Icon name="clock" size={16} />
+            {formatMinutesFromSeconds(stop.duration)}
+          </div>
+        </div>
+
+        <div className="progress-bar" onClick={handleProgressClick}>
+          <div
+            className="progress-fill"
+            style={{ width: `${progressPercent || 0}%` }}
+          />
+        </div>
+
+        <div className="time-info">
+          <span>{formatTime(currentTime)}</span>
+          <span>{formatTime(duration)}</span>
+        </div>
+
+        <div className="controls">
+          <button className="btn-icon" onClick={onPrevious} aria-label="Previous">
+            <Icon name="prev" size={20} />
+          </button>
+          <button
+            className="btn-icon-primary pulse"
+            onClick={togglePlay}
+            aria-label={isPlaying ? "Pause" : "Play"}
+          >
+            <Icon name={isPlaying ? "pause" : "play"} size={28} />
+          </button>
+          <button className="btn-icon" onClick={onNext} aria-label="Next">
+            <Icon name="next" size={20} />
+          </button>
+        </div>
       </div>
+    );
+  }
+);
 
-      <div className="time-info">
-        <span>{formatTime(currentTime)}</span>
-        <span>{formatTime(duration)}</span>
-      </div>
+const QuizModal = React.memo(
+  ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+    const [currentQuestion, setCurrentQuestion] = useState(0);
+    const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+    const [showResult, setShowResult] = useState(false);
+    const [score, setScore] = useState(0);
+    const [answered, setAnswered] = useState(false);
 
-      <div className="controls">
-        <button className="btn-icon" onClick={onPrevious} aria-label="Previous">
-          <Icon name="prev" size={20} />
-        </button>
-        <button className="btn-icon-primary pulse" onClick={togglePlay} aria-label={isPlaying ? "Pause" : "Play"}>
-          <Icon name={isPlaying ? "pause" : "play"} size={24} />
-        </button>
-        <button className="btn-icon" onClick={onNext} aria-label="Next">
-          <Icon name="next" size={20} />
-        </button>
-      </div>
-    </div>
-  );
-});
+    const question = QUIZ_QUESTIONS[currentQuestion];
 
-const QuizModal = React.memo(({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
-  const [showResult, setShowResult] = useState(false);
-  const [score, setScore] = useState(0);
-  const [answered, setAnswered] = useState(false);
+    const handleAnswer = useCallback(
+      (index: number) => {
+        if (answered) return;
+        setSelectedAnswer(index);
+        setAnswered(true);
+        if (index === question.correct) {
+          setScore((prev) => prev + 1);
+        }
+        setTimeout(() => setShowResult(true), 500);
+      },
+      [answered, question.correct]
+    );
 
-  const question = QUIZ_QUESTIONS[currentQuestion];
+    const nextQuestion = useCallback(() => {
+      if (currentQuestion < QUIZ_QUESTIONS.length - 1) {
+        setCurrentQuestion((prev) => prev + 1);
+        setSelectedAnswer(null);
+        setShowResult(false);
+        setAnswered(false);
+      }
+    }, [currentQuestion]);
 
-  const handleAnswer = useCallback((index: number) => {
-    if (answered) return;
-    setSelectedAnswer(index);
-    setAnswered(true);
-    if (index === question.correct) {
-      setScore((prev) => prev + 1);
-    }
-    setTimeout(() => setShowResult(true), 500);
-  }, [answered, question.correct]);
-
-  const nextQuestion = useCallback(() => {
-    if (currentQuestion < QUIZ_QUESTIONS.length - 1) {
-      setCurrentQuestion((prev) => prev + 1);
+    const resetQuiz = useCallback(() => {
+      setCurrentQuestion(0);
       setSelectedAnswer(null);
       setShowResult(false);
+      setScore(0);
       setAnswered(false);
-    }
-  }, [currentQuestion]);
+    }, []);
 
-  const resetQuiz = useCallback(() => {
-    setCurrentQuestion(0);
-    setSelectedAnswer(null);
-    setShowResult(false);
-    setScore(0);
-    setAnswered(false);
-  }, []);
+    if (!isOpen) return null;
 
-  if (!isOpen) return null;
+    const isComplete = currentQuestion === QUIZ_QUESTIONS.length - 1 && showResult;
 
-  const isComplete = currentQuestion === QUIZ_QUESTIONS.length - 1 && showResult;
+    return (
+      <div className="modal-overlay" onClick={onClose}>
+        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-header">
+            <h2>Knowledge Quiz</h2>
+            <button className="close-btn" onClick={onClose} aria-label="Close">
+              <Icon name="close" size={20} />
+            </button>
+          </div>
 
-  return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <h2>Knowledge Quiz</h2>
-          <button className="close-btn" onClick={onClose} aria-label="Close">
-            <Icon name="close" size={20} />
-          </button>
-        </div>
+          {!isComplete ? (
+            <>
+              <div className="quiz-progress">
+                Question {currentQuestion + 1} of {QUIZ_QUESTIONS.length}
+              </div>
 
-        {!isComplete ? (
-          <>
-            <div className="quiz-progress">
-              Question {currentQuestion + 1} of {QUIZ_QUESTIONS.length}
-            </div>
+              <h3 className="quiz-question">{question.question}</h3>
 
-            <h3 className="quiz-question">{question.question}</h3>
-
-            <div>
-              {question.options.map((option, index) => (
-                <button
-                  key={index}
-                  className={`quiz-option ${
-                    selectedAnswer === index ? "selected" : ""
-                  } ${
-                    showResult && index === question.correct ? "correct" : ""
-                  } ${
-                    showResult &&
-                    selectedAnswer === index &&
-                    index !== question.correct
-                      ? "incorrect"
-                      : ""
-                  }`}
-                  onClick={() => handleAnswer(index)}
-                  disabled={answered}
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
-
-            {showResult && (
-              <div className="quiz-explanation">
-                <p
-                  style={{
-                    margin: 0,
-                    fontWeight: 600,
-                    marginBottom: "12px",
-                    color:
-                      selectedAnswer === question.correct ? "#059669" : "#dc2626",
-                  }}
-                >
-                  {selectedAnswer === question.correct ? "✓ Correct!" : "✗ Incorrect"}
-                </p>
-                <p style={{ margin: 0, fontSize: "15px" }}>{question.explanation}</p>
-                {currentQuestion < QUIZ_QUESTIONS.length - 1 && (
+              <div>
+                {question.options.map((option, index) => (
                   <button
-                    className="btn btn-primary"
-                    onClick={nextQuestion}
-                    style={{ marginTop: "20px", width: "100%" }}
+                    key={index}
+                    className={`quiz-option ${
+                      selectedAnswer === index ? "selected" : ""
+                    } ${
+                      showResult && index === question.correct ? "correct" : ""
+                    } ${
+                      showResult &&
+                      selectedAnswer === index &&
+                      index !== question.correct
+                        ? "incorrect"
+                        : ""
+                    }`}
+                    onClick={() => handleAnswer(index)}
+                    disabled={answered}
                   >
-                    Next Question
+                    {option}
                   </button>
-                )}
+                ))}
               </div>
-            )}
-          </>
-        ) : (
-          <div className="quiz-result">
-            <div className="quiz-emoji">🏆</div>
-            <h3>Quiz Complete!</h3>
-            <div className="quiz-score">
-              Score: {score}/{QUIZ_QUESTIONS.length}
-            </div>
-            <p style={{ color: "var(--slate-600)", marginBottom: "32px" }}>
-              {score === QUIZ_QUESTIONS.length
-                ? "Perfect! You truly know our heroes!"
-                : score >= QUIZ_QUESTIONS.length * 0.7
-                ? "Great job! You have good knowledge about our air warriors."
-                : "Keep learning about our brave heroes!"}
-            </p>
-            <div
-              style={{
-                display: "flex",
-                gap: "12px",
-                justifyContent: "center",
-                flexWrap: "wrap",
-              }}
-            >
-              <button className="btn btn-primary" onClick={resetQuiz}>
-                Try Again
-              </button>
-              <button
-                className="btn btn-secondary"
-                onClick={onClose}
-                style={{ color: "var(--slate-700)" }}
+
+              {showResult && (
+                <div className="quiz-explanation">
+                  <p
+                    style={{
+                      margin: 0,
+                      fontWeight: 600,
+                      marginBottom: "12px",
+                      color:
+                        selectedAnswer === question.correct
+                          ? "#059669"
+                          : "#dc2626",
+                    }}
+                  >
+                    {selectedAnswer === question.correct
+                      ? "✓ Correct!"
+                      : "✗ Incorrect"}
+                  </p>
+                  <p style={{ margin: 0, fontSize: "15px" }}>
+                    {question.explanation}
+                  </p>
+                  {currentQuestion < QUIZ_QUESTIONS.length - 1 && (
+                    <button
+                      className="btn btn-primary"
+                      onClick={nextQuestion}
+                      style={{ marginTop: "20px", width: "100%" }}
+                    >
+                      Next Question
+                    </button>
+                  )}
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="quiz-result">
+              <div className="quiz-emoji">🏆</div>
+              <h3>Quiz Complete!</h3>
+              <div className="quiz-score">
+                Score: {score}/{QUIZ_QUESTIONS.length}
+              </div>
+              <p
+                style={{ color: "var(--slate-600)", marginBottom: "32px" }}
               >
-                Close
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-});
-
-const HeroModal = React.memo(({ hero, onClose }: { hero: Hero | null; onClose: () => void }) => {
-  if (!hero) return null;
-
-  return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <div className="hero-modal-header-row">
-            <div className="hero-modal-title-block">
-              <h2>
-                {hero.rank} {hero.name}
-              </h2>
-              <div className="hero-modal-subtitle">
-                {hero.service} • {hero.lifespan}
+                {score === QUIZ_QUESTIONS.length
+                  ? "Perfect! You truly know our heroes!"
+                  : score >= QUIZ_QUESTIONS.length * 0.7
+                  ? "Great job! You have good knowledge about our air warriors."
+                  : "Keep learning about our brave heroes!"}
+              </p>
+              <div
+                style={{
+                  display: "flex",
+                  gap: "12px",
+                  justifyContent: "center",
+                  flexWrap: "wrap",
+                }}
+              >
+                <button className="btn btn-primary" onClick={resetQuiz}>
+                  Try Again
+                </button>
+                <button
+                  className="btn btn-secondary"
+                  onClick={onClose}
+                  style={{ color: "var(--slate-700)" }}
+                >
+                  Close
+                </button>
               </div>
             </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+);
+
+const HeroModal = React.memo(
+  ({ hero, onClose }: { hero: Hero | null; onClose: () => void }) => {
+    if (!hero) return null;
+
+    return (
+      <div className="modal-overlay" onClick={onClose}>
+        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-header">
+            <div className="hero-modal-header-row">
+              <div className="hero-modal-title-block">
+                <h2>
+                  {hero.rank} {hero.name}
+                </h2>
+                <div className="hero-modal-subtitle">
+                  {hero.service} • {hero.lifespan}
+                </div>
+              </div>
+            </div>
+            <button className="close-btn" onClick={onClose} aria-label="Close">
+              <Icon name="close" size={20} />
+            </button>
           </div>
-          <button className="close-btn" onClick={onClose} aria-label="Close">
-            <Icon name="close" size={20} />
+
+          {hero.image && (
+            <div className="hero-modal-image">
+              <img src={hero.image} alt={hero.name} />
+            </div>
+          )}
+
+          <div className="hero-modal-meta-grid">
+            <div className="hero-meta-box">
+              <div className="hero-meta-label">Gallantry Award</div>
+              <div className="hero-meta-value">
+                {hero.award === "AC" ? "Ashoka Chakra" : hero.award}
+              </div>
+            </div>
+            <div className="hero-meta-box">
+              <div className="hero-meta-label">Operation / Mission</div>
+              <div className="hero-meta-value">{hero.operation || "—"}</div>
+            </div>
+            <div className="hero-meta-box">
+              <div className="hero-meta-label">Key Year / Date</div>
+              <div className="hero-meta-value">{hero.date}</div>
+            </div>
+            <div className="hero-meta-box">
+              <div className="hero-meta-label">Service</div>
+              <div className="hero-meta-value">Indian Air Force</div>
+            </div>
+          </div>
+
+          <div style={{ marginTop: "12px" }}>
+            <div className="hero-section-heading">Introduction</div>
+            <div className="hero-story">
+              <p style={{ margin: 0 }}>{hero.intro}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+);
+
+const HeroCard = React.memo(
+  ({
+    hero,
+    onClick,
+    isFavorite,
+    onToggleFavorite,
+  }: {
+    hero: Hero;
+    onClick: () => void;
+    isFavorite: boolean;
+    onToggleFavorite: () => void;
+  }) => {
+    return (
+      <div className="hero-card" onClick={onClick}>
+        <div className="hero-card-header">
+          <button
+            className="hero-fav-btn"
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleFavorite();
+            }}
+            aria-label="Toggle favourite"
+          >
+            <Icon
+              name="star"
+              size={18}
+              color={isFavorite ? "#fbbf24" : "#e5e7eb"}
+            />
           </button>
+          <span className={`award-badge ${hero.award}`}>
+            {hero.award === "AC" ? "Ashoka Chakra" : hero.award}
+          </span>
+          {hero.image && <img src={hero.image} alt={hero.name} />}
         </div>
-
-        {hero.image && (
-          <div className="hero-modal-image">
-            <img src={hero.image} alt={hero.name} />
-          </div>
-        )}
-
-        <div className="hero-modal-meta-grid">
-          <div className="hero-meta-box">
-            <div className="hero-meta-label">Gallantry Award</div>
-            <div className="hero-meta-value">{hero.award}</div>
-          </div>
-          <div className="hero-meta-box">
-            <div className="hero-meta-label">Operation / Mission</div>
-            <div className="hero-meta-value">{hero.operation || "—"}</div>
-          </div>
-          <div className="hero-meta-box">
-            <div className="hero-meta-label">Key Date</div>
-            <div className="hero-meta-value">{hero.date}</div>
-          </div>
-          <div className="hero-meta-box">
-            <div className="hero-meta-label">Service</div>
-            <div className="hero-meta-value">Indian Air Force</div>
-          </div>
-        </div>
-
-        <div style={{ marginTop: "12px" }}>
-          <div className="hero-section-heading">Official Citation</div>
-          <div className="hero-citation">
-            <p style={{ margin: 0 }}>{hero.citation}</p>
-          </div>
-        </div>
-
-        <div style={{ marginTop: "8px" }}>
-          <div className="hero-section-heading">Story</div>
-          <div className="hero-story">
-            <p style={{ margin: 0 }}>{hero.story}</p>
+        <div className="hero-card-body">
+          <h3 className="hero-card-title">
+            {hero.rank} {hero.name}
+          </h3>
+          <p className="hero-card-rank">{hero.service}</p>
+          <div className="hero-card-meta">
+            <span>📅 {hero.date}</span>
+            {hero.operation && (
+              <>
+                <span>•</span>
+                <span>{hero.operation}</span>
+              </>
+            )}
           </div>
         </div>
       </div>
-    </div>
-  );
-});
-
-const HeroCard = React.memo(({
-  hero,
-  onClick,
-  isFavorite,
-  onToggleFavorite,
-}: {
-  hero: Hero;
-  onClick: () => void;
-  isFavorite: boolean;
-  onToggleFavorite: () => void;
-}) => {
-  return (
-    <div className="hero-card" onClick={onClick}>
-      <div className="hero-card-header">
-        <button
-          className="hero-fav-btn"
-          onClick={(e) => {
-            e.stopPropagation();
-            onToggleFavorite();
-          }}
-          aria-label="Toggle favourite"
-        >
-          <Icon
-            name="star"
-            size={18}
-            color={isFavorite ? "#fbbf24" : "#e5e7eb"}
-          />
-        </button>
-        <span className={`award-badge ${hero.award}`}>{hero.award}</span>
-        {hero.image && <img src={hero.image} alt={hero.name} />}
-      </div>
-      <div className="hero-card-body">
-        <h3 className="hero-card-title">
-          {hero.rank} {hero.name}
-        </h3>
-        <p className="hero-card-rank">{hero.service}</p>
-        <div className="hero-card-meta">
-          <span>📅 {hero.date}</span>
-          <span>•</span>
-          <span>{hero.operation}</span>
-        </div>
-      </div>
-    </div>
-  );
-});
+    );
+  }
+);
 
 const PhotoSpots = React.memo(() => {
   return (
@@ -2200,68 +2499,78 @@ const PhotoSpots = React.memo(() => {
   );
 });
 
-const ParkMap = React.memo(({ currentStop, onStopClick }: { currentStop: number; onStopClick: (index: number) => void }) => {
-  return (
-    <div className="park-map-card">
-      <h4>Park Map</h4>
-      <p className="park-map-subtitle">Visual route of all tour stops</p>
-      <div className="park-map">
-        <div className="park-map-track">
-          {TOUR_STOPS.map((stop, index) => {
-            let status: "completed" | "current" | "upcoming";
-            if (index < currentStop) status = "completed";
-            else if (index === currentStop) status = "current";
-            else status = "upcoming";
+const ParkMap = React.memo(
+  ({
+    currentStop,
+    onStopClick,
+  }: {
+    currentStop: number;
+    onStopClick: (index: number) => void;
+  }) => {
+    return (
+      <div className="park-map-card">
+        <h4>Park Map</h4>
+        <p className="park-map-subtitle">Visual route of all tour stops</p>
+        <div className="park-map">
+          <div className="park-map-track">
+            {TOUR_STOPS.map((stop, index) => {
+              let status: "completed" | "current" | "upcoming";
+              if (index < currentStop) status = "completed";
+              else if (index === currentStop) status = "current";
+              else status = "upcoming";
 
-            return (
-              <div key={stop.id} className="park-node-wrapper">
-                <button
-                  type="button"
-                  className={`park-node ${status}`}
-                  title={stop.title}
-                  onClick={() => onStopClick(index)}
-                  aria-label={`Go to stop ${index + 1}: ${stop.title}`}
-                >
-                  {index + 1}
-                </button>
-                {status === "current" ? (
-                  <div className="park-node-label-current">You are here</div>
-                ) : (
-                  <div className="park-node-label">
-                    {status === "completed"
-                      ? "Completed"
-                      : status === "upcoming"
-                      ? "Upcoming"
-                      : "Current"}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
+              return (
+                <div key={stop.id} className="park-node-wrapper">
+                  <button
+                    type="button"
+                    className={`park-node ${status}`}
+                    title={stop.title}
+                    onClick={() => onStopClick(index)}
+                    aria-label={`Go to stop ${index + 1}: ${stop.title}`}
+                  >
+                    {index + 1}
+                  </button>
+                  {status === "current" ? (
+                    <div className="park-node-label-current">You are here</div>
+                  ) : (
+                    <div className="park-node-label">
+                      {status === "completed"
+                        ? "Completed"
+                        : status === "upcoming"
+                        ? "Upcoming"
+                        : "Current"}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
 
-        <div className="park-map-legend">
-          <div className="park-map-legend-item">
-            <span className="legend-dot legend-dot-completed" />
-            <span>Completed</span>
-          </div>
-          <div className="park-map-legend-item">
-            <span className="legend-dot legend-dot-current" />
-            <span>Current</span>
-          </div>
-          <div className="park-map-legend-item">
-            <span className="legend-dot legend-dot-upcoming" />
-            <span>Upcoming</span>
+          <div className="park-map-legend">
+            <div className="park-map-legend-item">
+              <span className="legend-dot legend-dot-completed" />
+              <span>Completed</span>
+            </div>
+            <div className="park-map-legend-item">
+              <span className="legend-dot legend-dot-current" />
+              <span>Current</span>
+            </div>
+            <div className="park-map-legend-item">
+              <span className="legend-dot legend-dot-upcoming" />
+              <span>Upcoming</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-});
+    );
+  }
+);
 
 /* ======================= MAIN APP ======================= */
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<"home" | "tour" | "heroes">("home");
+  const [currentPage, setCurrentPage] = useState<"home" | "tour" | "heroes">(
+    "tour" // start directly on the tour so audio can autoplay
+  );
   const [currentStop, setCurrentStop] = useState(0);
   const [showQuiz, setShowQuiz] = useState(false);
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
@@ -2270,12 +2579,18 @@ export default function App() {
   const goToStop = useCallback((index: number) => {
     if (index >= 0 && index < TOUR_STOPS.length) {
       setCurrentStop(index);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, []);
 
-  const nextStop = useCallback(() => goToStop(currentStop + 1), [currentStop, goToStop]);
-  const prevStop = useCallback(() => goToStop(currentStop - 1), [currentStop, goToStop]);
+  const nextStop = useCallback(
+    () => goToStop(currentStop + 1),
+    [currentStop, goToStop]
+  );
+  const prevStop = useCallback(
+    () => goToStop(currentStop - 1),
+    [currentStop, goToStop]
+  );
 
   const toggleFavorite = useCallback((id: string) => {
     setFavorites((prev) => {
@@ -2292,14 +2607,16 @@ export default function App() {
   const scrollToSection = useCallback((sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   }, []);
 
   const favouriteCount = favorites.size;
-  const completionPercent = Math.round(((currentStop + 1) / TOUR_STOPS.length) * 100);
-  const totalTourDuration = useMemo(() => 
-    TOUR_STOPS.reduce((sum, stop) => sum + stop.duration, 0), 
+  const completionPercent = Math.round(
+    ((currentStop + 1) / TOUR_STOPS.length) * 100
+  );
+  const totalTourDuration = useMemo(
+    () => TOUR_STOPS.reduce((sum, stop) => sum + stop.duration, 0),
     []
   );
 
@@ -2319,7 +2636,10 @@ export default function App() {
                 <Icon name="home" size={20} />
               </button>
 
-              <div className="nav-brand" onClick={() => setCurrentPage("home")}>
+              <div
+                className="nav-brand"
+                onClick={() => setCurrentPage("home")}
+              >
                 <div className="flag">
                   <div className="flag-saffron" />
                   <div className="flag-white">
@@ -2462,7 +2782,7 @@ export default function App() {
                   <h4>Audio Experience</h4>
                   <p>
                     Our guided audio tour brings history to life with expertly
-                    narrated stories, citations, and historical context at each stop
+                    narrated stories and historical context at each stop
                     throughout the memorial park.
                   </p>
                 </div>
@@ -2482,29 +2802,46 @@ export default function App() {
             </div>
           </section>
 
-          <section className="section" id="location" style={{ background: 'white' }}>
+          <section
+            className="section"
+            id="location"
+            style={{ background: "white" }}
+          >
             <div className="container">
               <div className="section-header">
                 <h2>Locate Us</h2>
-                <p>
-                  Visit Vayu Yodha Sthal at the Air Force Academy, Dundigal
-                </p>
+                <p>Visit Vayu Yodha Sthal at the Air Force Academy, Dundigal</p>
               </div>
 
               <div className="location-grid">
                 <div className="map-container">
                   <div className="map-placeholder">
                     <Icon name="mapPin" size={64} color="var(--primary)" />
-                    <h4 style={{ marginTop: "16px", color: "var(--slate-700)" }}>
+                    <h4
+                      style={{
+                        marginTop: "16px",
+                        color: "var(--slate-700)",
+                      }}
+                    >
                       Air Force Academy
                     </h4>
-                    <p style={{ maxWidth: "300px", margin: "8px auto" }}>
+                    <p
+                      style={{
+                        maxWidth: "300px",
+                        margin: "8px auto",
+                      }}
+                    >
                       Dundigal, Hyderabad, Telangana 500043
                     </p>
                     <button
                       className="btn btn-primary"
                       style={{ marginTop: "16px" }}
-                      onClick={() => window.open('https://maps.google.com/?q=Air+Force+Academy+Dundigal', '_blank')}
+                      onClick={() =>
+                        window.open(
+                          "https://maps.google.com/?q=Air+Force+Academy+Dundigal",
+                          "_blank"
+                        )
+                      }
                     >
                       <Icon name="mapPin" size={18} />
                       Open in Maps
@@ -2580,53 +2917,93 @@ export default function App() {
             </div>
           </section>
 
-          <div className="container" style={{ marginTop: "40px", marginBottom: "24px" }}>
+          <div
+            className="container"
+            style={{ marginTop: "40px", marginBottom: "24px" }}
+          >
             <div className="card">
               <h3>How to use this audio guide</h3>
-              <div style={{ 
-                display: 'grid', 
-                gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-                gap: '20px',
-                marginTop: '24px'
-              }}>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+                  gap: "20px",
+                  marginTop: "24px",
+                }}
+              >
                 <div>
-                  <h4 style={{ fontSize: '16px', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <h4
+                    style={{
+                      fontSize: "16px",
+                      marginBottom: "8px",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                    }}
+                  >
                     <Icon name="play" size={18} color="var(--primary)" />
                     Start at the entrance
                   </h4>
-                  <p style={{ marginTop: 4, fontSize: '14px' }}>
-                    Walk to the park entrance and tap <strong>Start Audio Tour</strong>. 
-                    Keep your phone volume at a comfortable level.
+                  <p style={{ marginTop: 4, fontSize: "14px" }}>
+                    Walk to the park entrance and tap{" "}
+                    <strong>Start Audio Tour</strong>. Keep your phone volume at
+                    a comfortable level.
                   </p>
                 </div>
                 <div>
-                  <h4 style={{ fontSize: '16px', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <h4
+                    style={{
+                      fontSize: "16px",
+                      marginBottom: "8px",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                    }}
+                  >
                     <Icon name="mapPin" size={18} color="var(--primary)" />
                     Follow the stop numbers
                   </h4>
-                  <p style={{ marginTop: 4, fontSize: '14px' }}>
-                    Each statue/zone has a matching stop number. Tap that stop card 
-                    on the app to hear the correct narration.
+                  <p style={{ marginTop: 4, fontSize: "14px" }}>
+                    Each statue/zone has a matching stop number. Tap that stop
+                    card on the app to hear the correct narration.
                   </p>
                 </div>
                 <div>
-                  <h4 style={{ fontSize: '16px', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <h4
+                    style={{
+                      fontSize: "16px",
+                      marginBottom: "8px",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                    }}
+                  >
                     <Icon name="award" size={18} color="var(--primary)" />
                     Use quiz & heroes view
                   </h4>
-                  <p style={{ marginTop: 4, fontSize: '14px' }}>
+                  <p style={{ marginTop: 4, fontSize: "14px" }}>
                     After the walk, open <strong>View Heroes</strong> and the{" "}
-                    <strong>Quiz</strong> to revisit stories and citations.
+                    <strong>Quiz</strong> to revisit stories and learn more
+                    about their journeys.
                   </p>
                 </div>
                 <div>
-                  <h4 style={{ fontSize: '16px', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <h4
+                    style={{
+                      fontSize: "16px",
+                      marginBottom: "8px",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                    }}
+                  >
                     <Icon name="star" size={18} color="var(--primary)" />
                     Favourites
                   </h4>
-                  <p style={{ marginTop: 4, fontSize: '14px' }}>
-                    Mark any stop or hero as a favourite using the ⭐ icon. You have{" "}
-                    {favouriteCount} favourite item{favouriteCount === 1 ? "" : "s"} saved.
+                  <p style={{ marginTop: 4, fontSize: "14px" }}>
+                    Mark any stop or hero as a favourite using the ⭐ icon. You
+                    have {favouriteCount} favourite item
+                    {favouriteCount === 1 ? "" : "s"} saved.
                   </p>
                 </div>
               </div>
@@ -2683,7 +3060,8 @@ export default function App() {
                         display: "inline-flex",
                         alignItems: "center",
                         gap: 8,
-                        background: "linear-gradient(135deg, #fef3c7, #fde68a)",
+                        background:
+                          "linear-gradient(135deg, #fef3c7, #fde68a)",
                         padding: "10px 16px",
                         borderRadius: 999,
                         border: "1px solid #fbbf24",
@@ -2707,6 +3085,7 @@ export default function App() {
                     stop={TOUR_STOPS[currentStop]}
                     onNext={nextStop}
                     onPrevious={prevStop}
+                    autoStart={true}
                   />
                 </div>
               </div>
@@ -2728,7 +3107,9 @@ export default function App() {
                   return (
                     <div
                       key={stop.id}
-                      className={`stop-card ${index === currentStop ? "active" : ""}`}
+                      className={`stop-card ${
+                        index === currentStop ? "active" : ""
+                      }`}
                       onClick={() => goToStop(index)}
                     >
                       <div className="stop-number">Stop {index + 1}</div>
@@ -2777,8 +3158,12 @@ export default function App() {
                     inside Vayu Yodha Sthal.
                   </p>
                   <ul>
-                    <li>Follow the stop numbers in order for the full story.</li>
-                    <li>You can always jump to any stop from the cards above.</li>
+                    <li>
+                      Follow the stop numbers in order for the full story.
+                    </li>
+                    <li>
+                      You can always jump to any stop from the cards above.
+                    </li>
                     <li>
                       The park map on the left shows which stops are completed,
                       current, or upcoming.
@@ -2789,14 +3174,17 @@ export default function App() {
                   <div className="tour-info-tag">After the Tour</div>
                   <h4>Keep the memories alive</h4>
                   <p style={{ marginTop: 6 }}>
-                    Once you complete the walk, take a moment to reflect and explore more.
+                    Once you complete the walk, take a moment to reflect and
+                    explore more.
                   </p>
                   <ul>
                     <li>
-                      Open <strong>Heroes</strong> to read full citations and stories.
+                      Open <strong>Heroes</strong> to read brief introductions
+                      to each air warrior.
                     </li>
                     <li>
-                      Attempt the <strong>Quiz</strong> to test what you remember.
+                      Attempt the <strong>Quiz</strong> to test what you
+                      remember.
                     </li>
                     <li>
                       Revisit your favourite stops anytime using the ⭐ icons.
@@ -2817,9 +3205,9 @@ export default function App() {
           <div style={{ textAlign: "center", marginBottom: "32px" }}>
             <h1 style={{ marginBottom: "16px" }}>Our Heroes</h1>
             <p style={{ maxWidth: "700px", margin: "0 auto" }}>
-              Honoring the brave souls who sacrificed everything for our nation's
-              freedom and sovereignty. Tap a hero card to read their story and
-              official citation.
+              Honoring the brave souls who sacrificed everything for our
+              nation's freedom and sovereignty. Tap a hero card to read a short
+              introduction to their life, service and gallant actions.
             </p>
           </div>
 
@@ -2846,7 +3234,13 @@ export default function App() {
             Indian Air Force Academy • Vayu Yodha Sthal
           </div>
           <div>Honoring the eternal sacrifice of our air warriors</div>
-          <div style={{ marginTop: "16px", fontSize: "12px", color: "var(--slate-500)" }}>
+          <div
+            style={{
+              marginTop: "16px",
+              fontSize: "12px",
+              color: "var(--slate-500)",
+            }}
+          >
             © 2025 Indian Air Force. All rights reserved.
           </div>
         </div>
