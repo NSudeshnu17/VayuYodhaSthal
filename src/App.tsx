@@ -154,7 +154,7 @@ p {
 }
 
 .hero-iaf-logo {
-  width: 300px;
+  width: 350px;
   height: auto;
   display: block;
   margin: 0 auto 1.5rem;
@@ -475,14 +475,18 @@ p {
   color: var(--primary);
 }
 
+/* ==== TOUR LAYOUT (with grid areas for correct order on mobile) ==== */
+
 .tour-page-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 2.4fr);
   gap: 24px;
   align-items: flex-start;
+  grid-template-areas: "map main";
 }
 
 .park-map-card {
+  grid-area: map;
   background: white;
   border-radius: var(--radius-lg);
   padding: 24px;
@@ -623,6 +627,7 @@ p {
 .legend-dot-upcoming { background: #cbd5e1; }
 
 .tour-main-column {
+  grid-area: main;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -1438,9 +1443,14 @@ p {
   animation: pulse 2s infinite;
 }
 
+/* ====== RESPONSIVE ====== */
+
 @media (max-width: 1024px) {
   .tour-page-grid {
     grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "main"
+      "map";
   }
   
   .park-map-card {
@@ -2287,12 +2297,12 @@ const GALLERY_VIDEOS = [
   {
     id: "v1",
     title: "Walkthrough of Vayu Yodha Sthal",
-    embedUrl: "https://www.youtube.com/watch?v=coJZrZkg7hk",
+    embedUrl: "https://www.youtube.com/embed/coJZrZkg7hk",
   },
   {
     id: "v2",
     title: "IAF Heritage & Gallantry",
-    embedUrl: "https://youtu.be/OkjDuzUEsBY?si=tT-9uWDrCDXTh10q",
+    embedUrl: "https://www.youtube.com/embed/OkjDuzUEsBY",
   },
 ];
 
@@ -2327,7 +2337,7 @@ const AudioPlayer = React.memo(
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(stop.duration);
-       const [audioError, setAudioError] = useState<string | null>(null);
+    const [audioError, setAudioError] = useState<string | null>(null);
     const attemptedAutoplayRef = useRef(false);
 
     useEffect(() => {
