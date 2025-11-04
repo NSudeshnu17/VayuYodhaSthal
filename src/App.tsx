@@ -224,7 +224,7 @@ p {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  background: linear-gradient(135deg, #2563eb, #1da0d8);
   color: white;
   box-shadow: 0 12px 35px rgba(37, 99, 235, 0.4);
 }
@@ -2287,12 +2287,12 @@ const GALLERY_VIDEOS = [
   {
     id: "v1",
     title: "Walkthrough of Vayu Yodha Sthal",
-    embedUrl: "https://www.youtube.com/embed/XXXXXXXXXXX",
+    embedUrl: "https://www.youtube.com/watch?v=coJZrZkg7hk",
   },
   {
     id: "v2",
     title: "IAF Heritage & Gallantry",
-    embedUrl: "https://www.youtube.com/embed/YYYYYYYYYYY",
+    embedUrl: "https://youtu.be/OkjDuzUEsBY?si=tT-9uWDrCDXTh10q",
   },
 ];
 
