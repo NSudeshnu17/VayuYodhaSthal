@@ -2216,22 +2216,48 @@ const AudioPlayer = React.memo(
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(stop.duration);
     const [audioError, setAudioError] = useState<string | null>(null);
+    const attemptedAutoplayRef = useRef(false);
 
+    // Reset state when stop changes
+    useEffect(() => {
+      setCurrentTime(0);
+      setAudioError(null);
+      setIsPlaying(false);
+      attemptedAutoplayRef.current = false;
+    }, [stop.id]);
+
+    // Main audio event handlers
     useEffect(() => {
       const audio = audioRef.current;
       if (!audio) return;
 
       const handleLoaded = () => {
-        setDuration(audio.duration || stop.duration);
-        if (autoStart && !isPlaying) {
-          const p = audio.play();
-          if (p && typeof p.then === "function") {
-            p.then(() => setIsPlaying(true)).catch(() => {
-              setIsPlaying(false);
-              setAudioError("Tap the play button to start the narration.");
-            });
-          } else {
-            setIsPlaying(true);
+        const actualDuration = audio.duration;
+        if (actualDuration && !isNaN(actualDuration)) {
+          setDuration(actualDuration);
+        }
+      };
+
+      const handleCanPlay = () => {
+        // Only attempt autoplay once per stop
+        if (autoStart && !attemptedAutoplayRef.current) {
+          attemptedAutoplayRef.current = true;
+          
+          const playPromise = audio.play();
+          
+          if (playPromise !== undefined) {
+            playPromise
+              .then(() => {
+                setIsPlaying(true);
+                setAudioError(null);
+              })
+              .catch((error) => {
+                console.warn("Autoplay blocked:", error.message);
+                setIsPlaying(false);
+                setAudioError(
+                  "Tap the play button to continue"
+                );
+              });
           }
         }
       };
@@ -2243,30 +2269,50 @@ const AudioPlayer = React.memo(
       const handleEnded = () => {
         setIsPlaying(false);
         setCurrentTime(0);
-        onNext(); // auto-advance to next stop when audio ends
+        // Automatically advance to next stop
+        setTimeout(() => {
+          onNext();
+        }, 500); // Small delay for smooth transition
       };
 
       const handleError = () => {
-        setAudioError("Audio file could not be loaded. Please check connectivity.");
+        console.error("Audio error for:", stop.audioFile);
+        setIsPlaying(false);
+        setAudioError(
+          `Cannot load audio file: ${stop.audioFile}`
+        );
+      };
+
+      const handlePlay = () => {
+        setIsPlaying(true);
+        setAudioError(null);
+      };
+
+      const handlePause = () => {
+        setIsPlaying(false);
       };
 
       audio.addEventListener("loadedmetadata", handleLoaded);
+      audio.addEventListener("canplay", handleCanPlay);
       audio.addEventListener("timeupdate", handleTimeUpdate);
       audio.addEventListener("ended", handleEnded);
       audio.addEventListener("error", handleError);
+      audio.addEventListener("play", handlePlay);
+      audio.addEventListener("pause", handlePause);
+
+      // Force load the audio
+      audio.load();
 
       return () => {
         audio.removeEventListener("loadedmetadata", handleLoaded);
+        audio.removeEventListener("canplay", handleCanPlay);
         audio.removeEventListener("timeupdate", handleTimeUpdate);
         audio.removeEventListener("ended", handleEnded);
         audio.removeEventListener("error", handleError);
+        audio.removeEventListener("play", handlePlay);
+        audio.removeEventListener("pause", handlePause);
       };
-    }, [stop.id, stop.duration, autoStart, isPlaying, onNext]);
-
-    useEffect(() => {
-      setCurrentTime(0);
-      setAudioError(null);
-    }, [stop.id]);
+    }, [stop.id, stop.audioFile, autoStart, onNext]);
 
     const togglePlay = useCallback(() => {
       const audio = audioRef.current;
@@ -2274,19 +2320,20 @@ const AudioPlayer = React.memo(
 
       if (isPlaying) {
         audio.pause();
-        setIsPlaying(false);
       } else {
-        const p = audio.play();
-        if (p && typeof p.then === "function") {
-          p.then(() => {
-            setIsPlaying(true);
-            setAudioError(null);
-          }).catch(() => {
-            setIsPlaying(false);
-            setAudioError("Browser blocked autoplay. Tap again to allow playback.");
-          });
-        } else {
-          setIsPlaying(true);
+        const playPromise = audio.play();
+        
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              setIsPlaying(true);
+              setAudioError(null);
+            })
+            .catch((error) => {
+              console.error("Playback error:", error);
+              setIsPlaying(false);
+              setAudioError("Unable to play audio");
+            });
         }
       }
     }, [isPlaying]);
@@ -2312,7 +2359,6 @@ const AudioPlayer = React.memo(
           ref={audioRef}
           src={stop.audioFile}
           preload="auto"
-          style={{ display: "none" }}
         />
 
         {audioError && (
@@ -2363,7 +2409,6 @@ const AudioPlayer = React.memo(
     );
   }
 );
-
 const QuizModal = React.memo(
   ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
