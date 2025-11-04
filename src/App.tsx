@@ -119,7 +119,7 @@ p {
 .hero {
   position: relative;
   background: linear-gradient(135deg, #00258e 0%, #0951c6 50%, #0065e1 100%);
-  padding: 120px 24px 80px;
+  padding: 64px 24px 80px;
   text-align: center;
   overflow: hidden;
 }
@@ -154,7 +154,7 @@ p {
 }
 
 .hero-iaf-logo {
-  width: 200px;
+  width: 300px;
   height: auto;
   display: block;
   margin: 0 auto 1.5rem;
@@ -1321,6 +1321,62 @@ p {
   margin: 0;
 }
 
+/* --- NEW: Heritage gallery styles --- */
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.gallery-item {
+  background: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--slate-200);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-caption {
+  padding: 12px 14px;
+  font-size: 14px;
+  color: var(--slate-700);
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.video-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--slate-200);
+  overflow: hidden;
+}
+
+.video-responsive {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+
+.video-responsive iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .footer {
   text-align: center;
   padding: 48px 24px;
@@ -1562,6 +1618,12 @@ const Icon = React.memo(
 );
 
 /* ======================= DATA ======================= */
+
+interface ResourceLink {
+  label: string;
+  url: string;
+}
+
 interface Hero {
   id: string;
   name: string;
@@ -1573,6 +1635,8 @@ interface Hero {
   operation?: string;
   intro: string;
   image?: string;
+  citation?: string;
+  resources?: ResourceLink[];
 }
 
 interface Stop {
@@ -1606,6 +1670,18 @@ const HEROES: Hero[] = [
     intro:
       "Flying Officer Nirmal Jit Singh Sekhon, a young Gnat pilot of No. 18 Squadron, is the only officer of the Indian Air Force to be awarded the Param Vir Chakra. On the morning of 14 December 1971 he scrambled alone against a formation of Pakistani Sabre jets attacking Srinagar airfield and, though heavily outnumbered, pressed home his attack with fearless determination, sacrificing his life to shield the valley and his comrades.",
     image: "images/NJS-Sekhon.png",
+    citation:
+      "For displaying supreme courage, flying skill and determination in the face of overwhelming odds while defending Srinagar airfield on 14 December 1971, Flying Officer Nirmal Jit Singh Sekhon was posthumously awarded the Param Vir Chakra.",
+    resources: [
+      {
+        label: "Official PVC citation (IAF website)",
+        url: "https://indianairforce.nic.in/content/flying-officer-nirmal-jit-singh-sekhon",
+      },
+      {
+        label: "Documentary on Sekhon’s last sortie (YouTube)",
+        url: "https://www.youtube.com/watch?v=XXXXXXXXXXX",
+      },
+    ],
   },
   {
     id: "mehar-singh",
@@ -2184,6 +2260,42 @@ const PHOTO_SPOTS = [
   },
 ];
 
+/* --- NEW: gallery data --- */
+
+const GALLERY_PHOTOS = [
+  {
+    id: "g1",
+    src: "images/gallery-entrance.jpg",
+    alt: "Vayu Yodha Sthal main entrance",
+    caption: "Main entrance to Vayu Yodha Sthal",
+  },
+  {
+    id: "g2",
+    src: "images/gallery-lotus-arena.jpg",
+    alt: "Lotus-shaped memorial arena",
+    caption: "Lotus-shaped arena symbolising peace emerging from conflict",
+  },
+  {
+    id: "g3",
+    src: "images/gallery-statues-row.jpg",
+    alt: "Row of marble statues",
+    caption: "Makrana marble statues of decorated air warriors",
+  },
+];
+
+const GALLERY_VIDEOS = [
+  {
+    id: "v1",
+    title: "Walkthrough of Vayu Yodha Sthal",
+    embedUrl: "https://www.youtube.com/embed/XXXXXXXXXXX",
+  },
+  {
+    id: "v2",
+    title: "IAF Heritage & Gallantry",
+    embedUrl: "https://www.youtube.com/embed/YYYYYYYYYYY",
+  },
+];
+
 /* ======================= UTILITY FUNCTIONS ======================= */
 const formatMinutesFromSeconds = (seconds: number): string => {
   const mins = Math.round(seconds / 60);
@@ -2215,10 +2327,9 @@ const AudioPlayer = React.memo(
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(stop.duration);
-    const [audioError, setAudioError] = useState<string | null>(null);
+       const [audioError, setAudioError] = useState<string | null>(null);
     const attemptedAutoplayRef = useRef(false);
 
-    // Reset state when stop changes
     useEffect(() => {
       setCurrentTime(0);
       setAudioError(null);
@@ -2226,7 +2337,6 @@ const AudioPlayer = React.memo(
       attemptedAutoplayRef.current = false;
     }, [stop.id]);
 
-    // Main audio event handlers
     useEffect(() => {
       const audio = audioRef.current;
       if (!audio) return;
@@ -2239,12 +2349,11 @@ const AudioPlayer = React.memo(
       };
 
       const handleCanPlay = () => {
-        // Only attempt autoplay once per stop
         if (autoStart && !attemptedAutoplayRef.current) {
           attemptedAutoplayRef.current = true;
-          
+
           const playPromise = audio.play();
-          
+
           if (playPromise !== undefined) {
             playPromise
               .then(() => {
@@ -2254,9 +2363,7 @@ const AudioPlayer = React.memo(
               .catch((error) => {
                 console.warn("Autoplay blocked:", error.message);
                 setIsPlaying(false);
-                setAudioError(
-                  "Tap the play button to continue"
-                );
+                setAudioError("Tap the play button to continue");
               });
           }
         }
@@ -2269,18 +2376,15 @@ const AudioPlayer = React.memo(
       const handleEnded = () => {
         setIsPlaying(false);
         setCurrentTime(0);
-        // Automatically advance to next stop
         setTimeout(() => {
           onNext();
-        }, 500); // Small delay for smooth transition
+        }, 500);
       };
 
       const handleError = () => {
         console.error("Audio error for:", stop.audioFile);
         setIsPlaying(false);
-        setAudioError(
-          `Cannot load audio file: ${stop.audioFile}`
-        );
+        setAudioError(`Cannot load audio file: ${stop.audioFile}`);
       };
 
       const handlePlay = () => {
@@ -2300,7 +2404,6 @@ const AudioPlayer = React.memo(
       audio.addEventListener("play", handlePlay);
       audio.addEventListener("pause", handlePause);
 
-      // Force load the audio
       audio.load();
 
       return () => {
@@ -2322,7 +2425,7 @@ const AudioPlayer = React.memo(
         audio.pause();
       } else {
         const playPromise = audio.play();
-        
+
         if (playPromise !== undefined) {
           playPromise
             .then(() => {
@@ -2355,17 +2458,9 @@ const AudioPlayer = React.memo(
 
     return (
       <div className="audio-player">
-        <audio
-          ref={audioRef}
-          src={stop.audioFile}
-          preload="auto"
-        />
+        <audio ref={audioRef} src={stop.audioFile} preload="auto" />
 
-        {audioError && (
-          <div className="audio-status">
-            ⚠️ {audioError}
-          </div>
-        )}
+        {audioError && <div className="audio-status">⚠️ {audioError}</div>}
 
         <div className="audio-info">
           <div className="audio-label">
@@ -2409,6 +2504,7 @@ const AudioPlayer = React.memo(
     );
   }
 );
+
 const QuizModal = React.memo(
   ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -2625,6 +2721,49 @@ const HeroModal = React.memo(
               <p style={{ margin: 0 }}>{hero.intro}</p>
             </div>
           </div>
+
+          {hero.citation && (
+            <div style={{ marginTop: "16px" }}>
+              <div className="hero-section-heading">Official Citation</div>
+              <div className="hero-story">
+                <p style={{ margin: 0, whiteSpace: "pre-line" }}>
+                  {hero.citation}
+                </p>
+              </div>
+            </div>
+          )}
+
+          {hero.resources && hero.resources.length > 0 && (
+            <div style={{ marginTop: "16px" }}>
+              <div className="hero-section-heading">Media & Resources</div>
+              <div className="hero-story">
+                <ul
+                  style={{
+                    margin: 0,
+                    paddingLeft: "18px",
+                    fontSize: "14px",
+                  }}
+                >
+                  {hero.resources.map((res) => (
+                    <li key={res.url} style={{ marginBottom: "8px" }}>
+                      <a
+                        href={res.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          color: "var(--primary)",
+                          textDecoration: "none",
+                          fontWeight: 600,
+                        }}
+                      >
+                        {res.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );
@@ -2712,6 +2851,52 @@ const PhotoSpots = React.memo(() => {
   );
 });
 
+/* --- NEW: Heritage gallery component --- */
+const HeritageGallery = React.memo(() => {
+  return (
+    <section className="section" id="gallery" style={{ background: "white" }}>
+      <div className="container">
+        <div className="section-header">
+          <h2>Heritage Gallery</h2>
+          <p>
+            Glimpses of Vayu Yodha Sthal and curated videos that bring the
+            memorial to life.
+          </p>
+        </div>
+
+        <div className="gallery-grid">
+          {GALLERY_PHOTOS.map((photo) => (
+            <div key={photo.id} className="gallery-item">
+              <img src={photo.src} alt={photo.alt} />
+              <div className="gallery-caption">{photo.caption}</div>
+            </div>
+          ))}
+        </div>
+
+        <h3 style={{ marginTop: "32px", marginBottom: "16px" }}>
+          Videos & documentaries
+        </h3>
+        <div className="video-grid">
+          {GALLERY_VIDEOS.map((video) => (
+            <div key={video.id} className="video-card">
+              <div className="video-responsive">
+                <iframe
+                  src={video.embedUrl}
+                  title={video.title}
+                  frameBorder={0}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+              <div className="gallery-caption">{video.title}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+});
+
 const ParkMap = React.memo(
   ({
     currentStop,
@@ -2782,7 +2967,7 @@ const ParkMap = React.memo(
 /* ======================= MAIN APP ======================= */
 export default function App() {
   const [currentPage, setCurrentPage] = useState<"home" | "tour" | "heroes">(
-    "home" // start on home screen
+    "home"
   );
   const [currentStop, setCurrentStop] = useState(0);
   const [showQuiz, setShowQuiz] = useState(false);
@@ -2808,11 +2993,8 @@ export default function App() {
   const toggleFavorite = useCallback((id: string) => {
     setFavorites((prev) => {
       const newFavorites = new Set(prev);
-      if (newFavorites.has(id)) {
-        newFavorites.delete(id);
-      } else {
-        newFavorites.add(id);
-      }
+      if (newFavorites.has(id)) newFavorites.delete(id);
+      else newFavorites.add(id);
       return newFavorites;
     });
   }, []);
@@ -2917,8 +3099,8 @@ export default function App() {
                 <button
                   className="btn btn-primary"
                   onClick={() => {
-                    setCurrentStop(0);       // start from Introduction stop
-                    setCurrentPage("tour");  // then go to tour page
+                    setCurrentStop(0);
+                    setCurrentPage("tour");
                   }}
                 >
                   <Icon name="play" size={20} />
@@ -3133,6 +3315,8 @@ export default function App() {
               </div>
             </div>
           </section>
+
+          <HeritageGallery />
 
           <div
             className="container"
