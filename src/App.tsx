@@ -12,7 +12,7 @@ const css = String.raw`
   --accent: #f59e0b;
   --success: #10b981;
   --danger: #ef4444;
-  --saffron: #FF9933;npm
+  --saffron: #FF9933;
   --green: #138808;
   --white: #FFFFFF;
   --slate-50: #f8fafc;
@@ -118,7 +118,7 @@ p {
 
 .hero {
   position: relative;
-  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+  background: linear-gradient(135deg, #00258e 0%, #0951c6 50%, #0065e1 100%);
   padding: 120px 24px 80px;
   text-align: center;
   overflow: hidden;
@@ -151,6 +151,13 @@ p {
   font-weight: 600;
   margin-bottom: 24px;
   animation: fadeInDown 0.6s ease-out;
+}
+
+.hero-iaf-logo {
+  width: 200px;
+  height: auto;
+  display: block;
+  margin: 0 auto 1.5rem;
 }
 
 .hero h1 {
@@ -967,7 +974,7 @@ p {
 }
 
 .hero-card-header {
-  height: 200px;
+  height: auto;
   background: linear-gradient(135deg, #1e3a8a, #3b82f6);
   position: relative;
   display: flex;
@@ -978,9 +985,9 @@ p {
 
 .hero-card-header img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.4;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.9;
 }
 
 .award-badge {
@@ -1112,14 +1119,14 @@ p {
 .hero-modal-image {
   border-radius: 18px;
   overflow: hidden;
-  max-height: 260px;
+  max-height: none;
   margin-bottom: 20px;
 }
 
 .hero-modal-image img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
 }
 
 .hero-section-heading {
@@ -1624,7 +1631,7 @@ const HEROES: Hero[] = [
     operation: "Jammu & Kashmir Operations 1947–48",
     intro:
       "Wing Commander Minoo Merwan Engineer was a highly decorated fighter pilot who had already distinguished himself in the Second World War. During the 1947–48 Kashmir operations he led daring missions in treacherous terrain, using his skill and leadership to provide close air support and ensure that Indian troops on the ground could hold vital positions in the face of determined enemy attacks.",
-    image: "/images/heroes/minoo-engineer.jpg",
+    image: "/images/MM-engineer.png",
   },
   {
     id: "noronha",
@@ -1637,7 +1644,7 @@ const HEROES: Hero[] = [
     operation: "Jammu & Kashmir Operations 1947–48",
     intro:
       "Squadron Leader Sidney Basil Noronha was a bomber pilot who repeatedly flew hazardous sorties over enemy-held areas in Jammu & Kashmir. Operating from difficult forward bases and facing rugged mountains, primitive navigation aids and heavy ground fire, he struck at key enemy positions with precision and calm courage that inspired his squadron.",
-    image: "/images/heroes/sidney-noronha.jpg",
+    image: "/images/Sidney-noronha.jpg",
   },
   {
     id: "moolgavkar",
@@ -1650,7 +1657,7 @@ const HEROES: Hero[] = [
     operation: "Jammu & Kashmir Operations 1947–48",
     intro:
       "Wing Commander Hrushikesh Moolgavkar, who would later become Chief of the Air Staff, earned the Maha Vir Chakra for his fearless leadership in the early Kashmir air operations. Flying repeated missions over mountainous terrain, he led his pilots in close support of hard-pressed troops and helped turn the tide in favour of India at a critical stage of the conflict.",
-    image: "/images/heroes/moolgavkar.jpg",
+    image: "/images/hrushikesh-moolgavkar.jpg",
   },
   {
     id: "jagmohan-nath",
@@ -1663,7 +1670,7 @@ const HEROES: Hero[] = [
     operation: "High-risk strategic reconnaissance",
     intro:
       "Squadron Leader Jag Mohan Nath was a legendary photo-reconnaissance pilot who flew deep, unarmed missions over hostile territory. Again and again he took his aircraft alone over enemy defenses at great personal risk, bringing back priceless intelligence that shaped India’s battle plans and saved countless lives on the ground.",
-    image: "/images/heroes/jagmohan-nath.jpg",
+    image: "/images/jagmohan-nath-iaf.jpg",
   },
   {
     id: "goodman",
@@ -1676,7 +1683,7 @@ const HEROES: Hero[] = [
     operation: "Indo–Pak War 1965",
     intro:
       "Wing Commander William MacDonald Goodman commanded a bomber squadron during the 1965 war. He led his crews on repeated night and day attacks against heavily defended targets, often flying through intense anti-aircraft fire, and his cool leadership and accuracy inflicted serious damage on the enemy’s war-making capability.",
-    image: "/images/heroes/william-goodman.jpg",
+    image: "/images/MVC06-Goodmn.jpg",
   },
   {
     id: "prem-pal-singh",
@@ -1689,7 +1696,7 @@ const HEROES: Hero[] = [
     operation: "Indo–Pak War 1965",
     intro:
       "Wing Commander Prem Pal Singh commanded an operational bomber squadron during the 1965 conflict. Between 6 and 9 September his formation struck vital enemy airfields and infrastructure again and again, undeterred by heavy ground fire, and his determination and flying skill significantly weakened the enemy’s ability to sustain air operations.",
-    image: "/images/heroes/prem-pal-singh.jpg",
+    image: "/images/Mvcprempal.jpg",
   },
   {
     id: "padmanabha-gautam",
@@ -1702,7 +1709,7 @@ const HEROES: Hero[] = [
     operation: "Indo–Pak War 1965",
     intro:
       "Squadron Leader Padmanabha Gautam was a Canberra pilot who flew deep-penetration bombing missions into hostile territory during the 1965 war. He repeatedly led his aircraft against well-defended targets at low level, pressing home his attacks with complete disregard for personal safety until he was ultimately killed in action.",
-    image: "/images/heroes/padmanabha-gautam.jpg",
+    image: "/images/Wg.-Cdr.-Padmanabha-Gautam.jpg",
   },
   {
     id: "benegal",
@@ -1715,7 +1722,7 @@ const HEROES: Hero[] = [
     operation: "Indo–Pak War 1971 (Eastern Sector)",
     intro:
       "Wing Commander Ramesh Sakharam Benegal led a bomber squadron tasked with crippling enemy forces in East Pakistan in 1971. Night after night he flew long missions through bad weather and heavy ground fire, guiding his crews to vital bridges, airfields and troop concentrations whose destruction hastened the liberation of Bangladesh.",
-    image: "/images/heroes/ramesh-benegal.jpg",
+    image: "/images/Benegal-1.jpg",
   },
   {
     id: "vb-vasisht",
@@ -1728,7 +1735,7 @@ const HEROES: Hero[] = [
     operation: "Indo–Pak War 1971",
     intro:
       "Wing Commander Vidya Bhushan Vasisht distinguished himself as a leader of strike operations in the 1971 war. He personally flew numerous sorties over heavily defended targets, calmly directing his formation under fire and ensuring that each mission achieved its aim with precision.",
-    image: "/images/heroes/vb-vasisht.jpg",
+    image: "/images/VB Vashisht.jpg",
   },
   {
     id: "mangat",
@@ -1741,7 +1748,7 @@ const HEROES: Hero[] = [
     operation: "Indo–Pak War 1971",
     intro:
       "Wing Commander Harcharan Singh Mangat was a combat leader whose unit saw intense action in 1971. He consistently chose the most dangerous tasks for himself, attacking defended airfields and troop concentrations and inspiring his pilots by leading from the front.",
-    image: "/images/heroes/hs-mangat.jpg",
+    image: "/images/harcharansinghmanget.jpg",
   },
   {
     id: "banerji",
@@ -1754,7 +1761,7 @@ const HEROES: Hero[] = [
     operation: "Indo–Pak War 1971",
     intro:
       "Wing Commander Madhabendra Banerji commanded a fighter-bomber squadron during the 1971 operations. Under his leadership the unit carried out repeated attacks against enemy armour, gun positions and supply lines, often at low level and under intense fire, playing a decisive role in blunting enemy advances.",
-    image: "/images/heroes/madhabendra-banerji.jpg",
+    image: "/images/madhabendra banerji.jpg",
   },
   {
     id: "parker",
@@ -1767,7 +1774,7 @@ const HEROES: Hero[] = [
     operation: "Indo–Pak War 1971",
     intro:
       "Wing Commander Cecil Vivian Parker led a Hunter squadron that spearheaded many of the IAF’s ground-attack missions in the western sector in 1971. With cool professionalism he flew low-level strikes against enemy armour and artillery, disregarding heavy fire to destroy positions that threatened Indian troops.",
-    image: "/images/heroes/cv-parker.jpg",
+    image: "/images/cecil-parker.jpg",
   },
   {
     id: "bhardwaj",
@@ -1780,7 +1787,7 @@ const HEROES: Hero[] = [
     operation: "Indo–Pak War 1971",
     intro:
       "Squadron Leader Ravinder Nath Bhardwaj was a courageous strike pilot in 1971. He flew multiple hazardous missions at low altitude against strongly defended enemy targets and continued his attacks even after his aircraft was hit, displaying gallantry of the highest order.",
-    image: "/images/heroes/rn-bhardwaj.jpg",
+    image: "/images/ravindranath-baradwwaj.jpg",
   },
   {
     id: "sk-kaul",
@@ -1793,7 +1800,7 @@ const HEROES: Hero[] = [
     operation: "Indo–Pak War 1971",
     intro:
       "Wing Commander Swaroop Krishna Kaul, later an Air Marshal, commanded a MiG squadron in the western sector during the 1971 war. He personally led deep strike and escort missions into enemy territory, often in the face of strong opposition, and his tactical acumen and personal bravery contributed greatly to achieving air superiority.",
-    image: "/images/heroes/sk-kaul.jpg",
+    image: "/images/swaroop kaul.jpg",
   },
   {
     id: "talwar",
@@ -1806,7 +1813,7 @@ const HEROES: Hero[] = [
     operation: "Indo–Pak War 1971",
     intro:
       "Wing Commander Man Mohan Bir Singh Talwar led his squadron with exceptional courage during the 1971 conflict. Undertaking mission after mission over defended targets, he demonstrated cool judgement under fire and an unwavering commitment to support the soldiers fighting on the ground.",
-    image: "/images/heroes/mmbs-talwar.jpg",
+    image: "/images/man mohan talwar.jpg",
   },
   {
     id: "d-costa",
@@ -1819,7 +1826,7 @@ const HEROES: Hero[] = [
     operation: "Indo–Pak War 1971",
     intro:
       "Wing Commander Albert D’Costa was a fighter-bomber leader who carried out several key strikes during the 1971 war. He repeatedly led his formation into heavily defended areas, attacking gun positions, fuel dumps and armour and ensuring that his squadron always completed its tasks despite strong opposition.",
-    image: "/images/heroes/albert-dcosta.jpg",
+    image: "/images/allan dcosta.jpg",
   },
   {
     id: "chandan-singh",
@@ -1832,7 +1839,7 @@ const HEROES: Hero[] = [
     operation: "Indo–Pak War 1971, Eastern Sector",
     intro:
       "Group Captain Chandan Singh masterminded and personally supervised daring transport and helicopter operations in the eastern theatre in 1971. He played a central role in the famous heliborne assault at Sylhet and in sustaining forward troops across rivers and marshes, often flying in marginal weather and under enemy fire.",
-    image: "/images/heroes/chandan-singh.jpg",
+    image: "/images/chandan-singh.jpg",
   },
   {
     id: "devayya",
@@ -1845,7 +1852,7 @@ const HEROES: Hero[] = [
     operation: "Indo–Pak War 1965",
     intro:
       "Squadron Leader A. B. Devayya flew a Mystère fighter-bomber during the 1965 war. On a deep strike mission over Pakistan he engaged an enemy Sabre in a fierce dogfight, shooting it down at the cost of his own life. His gallantry came to light years later through Pakistani records, and he was awarded the Maha Vir Chakra posthumously.",
-    image: "/images/heroes/ab-devayya.jpg",
+    image: "/images/Devayya.jpeg",
   },
   {
     id: "nirala",
@@ -1858,7 +1865,7 @@ const HEROES: Hero[] = [
     operation: "Counter-terrorist operation, Jammu & Kashmir",
     intro:
       "Corporal Jyoti Prakash Nirala was a Garud commando who laid down his life while fighting terrorists in Bandipora district of Jammu & Kashmir in November 2017. Despite heavy hostile fire he held his ground in an exposed position, killing and injuring multiple terrorists and shielding his team until he was fatally wounded, earning the Ashoka Chakra for supreme peacetime valour.",
-    image: "/images/heroes/jp-nirala.jpg",
+    image: "/images/Corporal-Jyoti-Prakash-Nirala-pp.jpg",
   },
 ];
 
@@ -1868,57 +1875,219 @@ const TOUR_STOPS: Stop[] = [
     title: "Welcome to Vayu Yodha Sthal",
     subtitle: "Eternal Air Warriors Park",
     duration: 120,
-    audioFile: "/audio/stop1_entrance.mp3",
+    audioFile: "/audio/stop00_introduction.mp3",
     description:
       "Welcome to Vayu Yodha Sthal at the Air Force Academy, Dundigal. This sacred space honors the valor and sacrifice of our air warriors. The park features statues crafted from pristine Makrana marble, positioned to catch sunlight throughout the day, symbolizing how our heroes continue to illuminate our path.",
     photoSpot: true,
   },
   {
-    id: "sekhon_statue",
-    title: "Flying Officer Nirmaljit Singh Sekhon",
-    subtitle: "Param Vir Chakra - The Ultimate Sacrifice",
+    id: "sekhon",
+    title: "Flying Officer Nirmal Jit Singh Sekhon",
+    subtitle: "Param Vir Chakra – Defence of Srinagar (1971)",
     duration: 240,
-    audioFile: "/audio/stop2_sekhon.mp3",
+    audioFile: "/audio/stop01_sekhon.mp3",
     description:
-      "Stand before the statue of Flying Officer Nirmaljit Singh Sekhon, the only IAF officer awarded the Param Vir Chakra. On 14 December 1971, he took on six enemy aircraft single-handedly over Srinagar, sacrificing his life to protect the Kashmir valley.",
+      "At this stop we honour Flying Officer Nirmal Jit Singh Sekhon, the only Indian Air Force officer awarded the Param Vir Chakra. On 14 December 1971, he scrambled alone in his Gnat against a formation of Pakistani Sabres over Srinagar, fighting bravely while outnumbered and laying down his life to protect the valley and his comrades.",
     photoSpot: true,
   },
   {
-    id: "lotus_arena",
-    title: "Lotus Arena & Reflection Pool",
-    subtitle: "Symbol of Peace and Purity",
-    duration: 90,
-    audioFile: "/audio/stop3_lotus.mp3",
+    id: "mehar-singh",
+    title: "Air Commodore Mehar Singh",
+    subtitle: "Maha Vir Chakra – Pioneer of Air Operations in J&K",
+    duration: 210,
+    audioFile: "/audio/stop02_mehar_singh.mp3",
     description:
-      "The lotus-shaped seating arena with its tranquil water fountain represents how peace emerges from conflict. Like the lotus that blooms in muddy water, our heroes rose above adversity to protect our nation.",
+      "Air Commodore Mehar Singh led some of the earliest and most dangerous air operations into Jammu & Kashmir in 1947–48. Personally flying into rough, high-altitude airstrips like Leh and Poonch, often in bad weather and under threat of enemy fire, he opened vital lifelines that saved isolated garrisons and civilians.",
     photoSpot: true,
   },
   {
-    id: "mvc_gallery",
-    title: "Maha Vir Chakra Gallery",
-    subtitle: "Exceptional Gallantry",
-    duration: 180,
-    audioFile: "/audio/stop4_mvc.mp3",
+    id: "minoo-engineer",
+    title: "Wing Commander Minoo Merwan Engineer",
+    subtitle: "Maha Vir Chakra – Fighter Leader in the Mountains",
+    duration: 210,
+    audioFile: "/audio/stop03_minoo_engineer.mp3",
     description:
-      "This section honors the Maha Vir Chakra recipients of the Indian Air Force. Each bust tells a story of exceptional courage in the face of the enemy.",
+      "Wing Commander Minoo Merwan Engineer, a highly decorated World War II veteran, led daring missions over the mountains of Jammu & Kashmir during the 1947–48 operations. His calm leadership and superb flying provided close air support that helped Indian troops hold vital positions against heavy odds.",
+    photoSpot: true,
   },
   {
-    id: "ac_gallery",
-    title: "Ashoka Chakra Gallery",
-    subtitle: "Peacetime Valor",
-    duration: 180,
-    audioFile: "/audio/stop5_ac.mp3",
+    id: "noronha",
+    title: "Squadron Leader Sidney Basil Noronha",
+    subtitle: "Maha Vir Chakra – Courage under Fire",
+    duration: 210,
+    audioFile: "/audio/stop04_noronha.mp3",
     description:
-      "The Ashoka Chakra recipients displayed conspicuous bravery in peacetime operations, saving lives and protecting our nation beyond the battlefield.",
+      "Squadron Leader Sidney Basil Noronha flew hazardous bomber sorties over enemy-held areas in Jammu & Kashmir. Operating from primitive forward bases and facing rugged terrain and ground fire, he repeatedly attacked key enemy positions with precision and cool determination.",
+    photoSpot: true,
   },
   {
-    id: "aircraft_display",
-    title: "Historic Aircraft Display",
-    subtitle: "Wings of Victory",
-    duration: 150,
-    audioFile: "/audio/stop6_aircraft.mp3",
+    id: "moolgavkar",
+    title: "Wing Commander Hrushikesh Moolgavkar",
+    subtitle: "Maha Vir Chakra – Future Chief in Combat",
+    duration: 210,
+    audioFile: "/audio/stop05_moolgavkar.mp3",
     description:
-      "View replicas and information about the legendary aircraft that served our air warriors, including the Folland Gnat, MiG-21, and others that played crucial roles in our victories.",
+      "Wing Commander Hrushikesh Moolgavkar, who later became Chief of the Air Staff, earned the Maha Vir Chakra for fearless leadership in the Kashmir operations of 1947–48. He led numerous missions over treacherous mountains, giving crucial air support that helped turn the tide of the conflict.",
+    photoSpot: true,
+  },
+  {
+    id: "jagmohan-nath",
+    title: "Squadron Leader Jag Mohan Nath",
+    subtitle: "Maha Vir Chakra – Legendary Reconnaissance Pilot",
+    duration: 210,
+    audioFile: "/audio/stop06_jagmohan_nath.mp3",
+    description:
+      "Squadron Leader Jag Mohan Nath became a legend for his deep, unarmed reconnaissance missions over hostile territory. Flying alone over enemy defences again and again, he brought back priceless intelligence that shaped India’s battle plans and saved countless lives.",
+    photoSpot: true,
+  },
+  {
+    id: "goodman",
+    title: "Wing Commander William MacDonald Goodman",
+    subtitle: "Maha Vir Chakra – Bomber Leader of 1965",
+    duration: 210,
+    audioFile: "/audio/stop07_goodman.mp3",
+    description:
+      "Wing Commander William MacDonald Goodman commanded a bomber squadron during the 1965 Indo–Pak war. He led his crews on repeated strikes against heavily defended targets by day and night, flying through intense anti-aircraft fire and inflicting serious damage on the enemy’s war-fighting capability.",
+    photoSpot: true,
+  },
+  {
+    id: "prem-pal-singh",
+    title: "Wing Commander Prem Pal Singh",
+    subtitle: "Maha Vir Chakra – Precision Night Raider",
+    duration: 210,
+    audioFile: "/audio/stop08_prem_pal_singh.mp3",
+    description:
+      "Wing Commander Prem Pal Singh led an operational bomber squadron in 1965. Between 6 and 9 September his formations repeatedly struck vital airfields and infrastructure in enemy territory, pressing home attacks through heavy ground fire with determination and skill.",
+    photoSpot: true,
+  },
+  {
+    id: "padmanabha-gautam",
+    title: "Squadron Leader Padmanabha Gautam",
+    subtitle: "Maha Vir Chakra – Deep Penetration Strikes",
+    duration: 210,
+    audioFile: "/audio/stop09_padmanabha_gautam.mp3",
+    description:
+      "Squadron Leader Padmanabha Gautam flew Canberra bombers on deep-penetration missions during the 1965 war. He repeatedly led low-level attacks against well-defended targets deep inside hostile territory, showing complete disregard for personal safety until he was killed in action.",
+    photoSpot: true,
+  },
+  {
+    id: "benegal",
+    title: "Wing Commander Ramesh Sakharam Benegal",
+    subtitle: "Maha Vir Chakra – 1971 Eastern Front",
+    duration: 210,
+    audioFile: "/audio/stop10_benegal.mp3",
+    description:
+      "Wing Commander Ramesh Sakharam Benegal commanded a bomber squadron in the eastern theatre in 1971. Night after night he led long missions through bad weather and heavy ground fire, destroying bridges, airfields and troop concentrations that hastened the liberation of Bangladesh.",
+    photoSpot: true,
+  },
+  {
+    id: "vb-vasisht",
+    title: "Wing Commander Vidya Bhushan Vasisht",
+    subtitle: "Maha Vir Chakra – Strike Leader of 1971",
+    duration: 210,
+    audioFile: "/audio/stop11_vb_vasisht.mp3",
+    description:
+      "Wing Commander Vidya Bhushan Vasisht distinguished himself as a strike leader in the 1971 war. He personally flew numerous sorties over strongly defended targets, calmly directing his formation under fire and ensuring each mission achieved its aim with precision.",
+    photoSpot: true,
+  },
+  {
+    id: "mangat",
+    title: "Wing Commander Harcharan Singh Mangat",
+    subtitle: "Maha Vir Chakra – Leading from the Front",
+    duration: 210,
+    audioFile: "/audio/stop12_mangat.mp3",
+    description:
+      "Wing Commander Harcharan Singh Mangat’s unit saw intense combat in 1971. He consistently chose the most dangerous tasks for himself, attacking defended airfields and troop concentrations and inspiring his pilots by leading from the front.",
+    photoSpot: true,
+  },
+  {
+    id: "banerji",
+    title: "Wing Commander Madhabendra Banerji",
+    subtitle: "Maha Vir Chakra – Armour & Gun-Post Destroyer",
+    duration: 210,
+    audioFile: "/audio/stop13_banerji.mp3",
+    description:
+      "Wing Commander Madhabendra Banerji commanded a fighter-bomber squadron in 1971. Under his leadership the unit carried out repeated low-level attacks on enemy armour, gun positions and supply lines, decisively blunting enemy advances.",
+    photoSpot: true,
+  },
+  {
+    id: "parker",
+    title: "Wing Commander Cecil Vivian Parker",
+    subtitle: "Maha Vir Chakra – Hunter Squadron Commander",
+    duration: 210,
+    audioFile: "/audio/stop14_parker.mp3",
+    description:
+      "Wing Commander Cecil Vivian Parker led a Hunter squadron that spearheaded many ground-attack missions in the western sector in 1971. He flew low-level strikes against enemy armour and artillery, disregarding heavy fire to destroy positions threatening Indian troops.",
+    photoSpot: true,
+  },
+  {
+    id: "bhardwaj",
+    title: "Squadron Leader Ravinder Nath Bhardwaj",
+    subtitle: "Maha Vir Chakra – Courage in the Face of Fire",
+    duration: 210,
+    audioFile: "/audio/stop15_bhardwaj.mp3",
+    description:
+      "Squadron Leader Ravinder Nath Bhardwaj flew hazardous low-altitude missions against strongly defended enemy targets in 1971. Even after his aircraft was hit, he continued his attack with gallantry of the highest order.",
+    photoSpot: true,
+  },
+  {
+    id: "sk-kaul",
+    title: "Wing Commander Swaroop Krishna Kaul",
+    subtitle: "Maha Vir Chakra – MiG Squadron Commander",
+    duration: 210,
+    audioFile: "/audio/stop16_sk_kaul.mp3",
+    description:
+      "Wing Commander Swaroop Krishna Kaul, later an Air Marshal, commanded a MiG squadron in the western sector in 1971. He led deep strike and escort missions into enemy territory, often against strong opposition, and his tactical skill helped the IAF secure air superiority.",
+    photoSpot: true,
+  },
+  {
+    id: "talwar",
+    title: "Wing Commander Man Mohan Bir Singh Talwar",
+    subtitle: "Maha Vir Chakra – Determined Strike Pilot",
+    duration: 210,
+    audioFile: "/audio/stop17_talwar.mp3",
+    description:
+      "Wing Commander Man Mohan Bir Singh Talwar led his squadron with exceptional courage in 1971. Mission after mission, he flew over defended targets with cool judgement under fire, fully committed to supporting soldiers fighting on the ground.",
+    photoSpot: true,
+  },
+  {
+    id: "d-costa",
+    title: "Wing Commander Albert D’Costa",
+    subtitle: "Maha Vir Chakra – Fighter-Bomber Leader",
+    duration: 210,
+    audioFile: "/audio/stop18_dcosta.mp3",
+    description:
+      "Wing Commander Albert D’Costa carried out several key strikes during the 1971 war. He repeatedly led his formation into heavily defended areas, attacking gun positions, fuel dumps and armour and ensuring his squadron always completed its tasks.",
+    photoSpot: true,
+  },
+  {
+    id: "chandan-singh",
+    title: "Group Captain Chandan Singh",
+    subtitle: "Maha Vir Chakra – Master of Airlift & Heliborne Ops",
+    duration: 210,
+    audioFile: "/audio/stop19_chandan_singh.mp3",
+    description:
+      "Group Captain Chandan Singh masterminded daring transport and helicopter operations in the eastern theatre in 1971. He played a central role in the famous heliborne assault at Sylhet and in sustaining forward troops across rivers and marshes under enemy fire.",
+    photoSpot: true,
+  },
+  {
+    id: "devayya",
+    title: "Squadron Leader A. B. Devayya",
+    subtitle: "Maha Vir Chakra – Posthumous Hero of 1965",
+    duration: 210,
+    audioFile: "/audio/stop20_devayya.mp3",
+    description:
+      "Squadron Leader A. B. Devayya flew a Mystère fighter-bomber during the 1965 war. On a deep strike mission he engaged an enemy Sabre in a fierce dogfight, shooting it down at the cost of his own life. His gallantry came to light years later through enemy records, leading to a posthumous Maha Vir Chakra.",
+    photoSpot: true,
+  },
+  {
+    id: "nirala",
+    title: "Corporal Jyoti Prakash Nirala",
+    subtitle: "Ashoka Chakra – Garud Commando in J&K",
+    duration: 210,
+    audioFile: "/audio/stop21_nirala.mp3",
+    description:
+      "Corporal Jyoti Prakash Nirala, a Garud commando, laid down his life fighting terrorists in Bandipora district of Jammu & Kashmir in November 2017. Holding an exposed position under heavy fire, he killed and injured multiple terrorists while shielding his team, earning the Ashoka Chakra for supreme peacetime valour.",
     photoSpot: true,
   },
 ];
@@ -2048,7 +2217,6 @@ const AudioPlayer = React.memo(
     const [duration, setDuration] = useState(stop.duration);
     const [audioError, setAudioError] = useState<string | null>(null);
 
-    // Set up listeners for the current audio element
     useEffect(() => {
       const audio = audioRef.current;
       if (!audio) return;
@@ -2075,6 +2243,7 @@ const AudioPlayer = React.memo(
       const handleEnded = () => {
         setIsPlaying(false);
         setCurrentTime(0);
+        onNext(); // auto-advance to next stop when audio ends
       };
 
       const handleError = () => {
@@ -2092,9 +2261,8 @@ const AudioPlayer = React.memo(
         audio.removeEventListener("ended", handleEnded);
         audio.removeEventListener("error", handleError);
       };
-    }, [stop.id, stop.duration, autoStart, isPlaying]);
+    }, [stop.id, stop.duration, autoStart, isPlaying, onNext]);
 
-    // Reset when stop changes
     useEffect(() => {
       setCurrentTime(0);
       setAudioError(null);
@@ -2569,7 +2737,7 @@ const ParkMap = React.memo(
 /* ======================= MAIN APP ======================= */
 export default function App() {
   const [currentPage, setCurrentPage] = useState<"home" | "tour" | "heroes">(
-    "tour" // start directly on the tour so audio can autoplay
+    "home" // start on home screen
   );
   const [currentStop, setCurrentStop] = useState(0);
   const [showQuiz, setShowQuiz] = useState(false);
@@ -2640,13 +2808,6 @@ export default function App() {
                 className="nav-brand"
                 onClick={() => setCurrentPage("home")}
               >
-                <div className="flag">
-                  <div className="flag-saffron" />
-                  <div className="flag-white">
-                    <div className="ashoka-chakra" />
-                  </div>
-                  <div className="flag-green" />
-                </div>
                 Vayu Yodha Sthal
               </div>
 
@@ -2684,11 +2845,19 @@ export default function App() {
         <>
           <div className="hero">
             <div className="hero-content">
+              <img
+                src="/images/iaf-logo.svg"
+                alt="Indian Air Force Emblem"
+                className="hero-iaf-logo"
+              />
+
               <div className="hero-badge">
                 <Icon name="medal" size={18} />
                 Indian Air Force Heritage
               </div>
+
               <h1>Vayu Yodha Sthal</h1>
+
               <p className="hero-subtitle">
                 वायु योद्धा स्थल • Eternal Air Warriors Park
               </p>
@@ -2702,7 +2871,10 @@ export default function App() {
               <div className="hero-actions">
                 <button
                   className="btn btn-primary"
-                  onClick={() => setCurrentPage("tour")}
+                  onClick={() => {
+                    setCurrentStop(0);       // start from Introduction stop
+                    setCurrentPage("tour");  // then go to tour page
+                  }}
                 >
                   <Icon name="play" size={20} />
                   Start Audio Tour
