@@ -5672,7 +5672,7 @@ const TOUR_STOPS: Stop[] = [
     title: "Wing Commander Harcharan Singh Mangat",
     subtitle: "Maha Vir Chakra – Leading from the Front",
     duration: 210,
-    audioFile: "audio/stop12_mangat.mp3",
+    audioFile: "audio/stop12_manget.mp3",
     description:
       "Wing Commander Harcharan Singh Mangat’s unit saw intense combat in 1971. He consistently chose the most dangerous tasks for himself, attacking defended airfields and troop concentrations and inspiring his pilots by leading from the front.",
     photoSpot: true,
